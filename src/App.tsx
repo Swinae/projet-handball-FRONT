@@ -1,33 +1,36 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import {Route, Routes } from 'react-router-dom';
+import { useState } from 'react';
+import { LoginModal } from './components/modales/LoginModal/LoginModal';
+import { NavBar } from './components/Navbar/NavBar';
+import { ClubIdentity } from './components/ClubIdentity/ClubIdentity';
+import {ClubBanners} from './components/ClubBanners/ClubBanners';
+import { NotFoundPage } from './services/utils/NotFoundPage';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [userRole, setUserRole]=useState<string>("");
+
+  //function to get userRole in localstorage send by server
+  function handleRole():void{
+    setUserRole("admin");
+  }
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <header>
+        <div className='div-up'>
+          <ClubIdentity/>
+          <LoginModal handleRole={handleRole} />
+        </div>
+        <NavBar userRole={userRole}/>
+        <ClubBanners/>
+      </header>
+
+      <Routes>
+        <Route path='/' element/>
+        <Route path='/news' element/>
+        <Route path='*' element={<NotFoundPage/>}/>
+      </Routes>
     </>
   )
 }

@@ -40,3 +40,12 @@
 .read-the-docs {
   color: #888;
 }
+
+header{
+  background-color: #15616D;
+}
+
+.div-up{
+  display: flex;
+  justify-content:space-between;
+}
