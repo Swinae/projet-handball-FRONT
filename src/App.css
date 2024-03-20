@@ -3,6 +3,12 @@ header{
 }
 
 .div-up{
+  padding-top: 1rem;
   display: flex;
   justify-content:space-between;
+}
+
+.div-user-login{
+  display: flex;
+  gap: 3rem;
 }
