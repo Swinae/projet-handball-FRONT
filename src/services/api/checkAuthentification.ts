@@ -1,8 +1,13 @@
-import { useApi } from "../hooks/useApi";
+//import { useApi } from "../hooks/useApi";
+import { users } from "../../components/modales/LoginModal/faker";
+import { DataConnexion } from "../interfaces/DataConnexion";
 
-const api=useApi();
+//const api = useApi();
 
-export async function checkAuthentification(userLoginData:any){
+export async function checkAuthentification(userLoginData: DataConnexion):Promise<any> {
+  console.log('userLoginData: ',userLoginData);
+  const userFound=users.find((user) => user.email === userLoginData.email && user.password === userLoginData.password )
   //const response = await api.post(``,userLoginData);
-  //console.log("response :",response)
+  //console.log(response);
+  return userFound? userFound:null;
 }

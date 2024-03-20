@@ -3,10 +3,11 @@ import * as yup from 'yup';
 import { BtnLoginDisconect } from "../../BtnLoginDisconect/BtnLoginDisconect";
 import { LoginModalProps } from "../../../services/interfaces/LoginModalProps";
 import { DataConnexion } from "../../../services/interfaces/DataConnexion";
+import { checkAuthentification } from "../../../services/api/checkAuthentification";
 
 
 export function LoginModal(props: LoginModalProps) {
-  const { handleRole } = props;
+  const { handleRole,handleUserDataFromServer } = props;
 
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
@@ -48,9 +49,19 @@ export function LoginModal(props: LoginModalProps) {
       console.log('Le formulaire est validé:', userData)
 
       //use useApi
+      const response = await checkAuthentification(userData);
+      if (response != undefined) {
+        console.log("response:", response)
 
-      setIsAuthenticated(true);
-      handleRole()
+        //redifine UserDataFromServer
+        handleUserDataFromServer(response);
+        
+        setIsAuthenticated(true);
+        handleRole(response.role)
+      }
+      else {
+        console.log("erreur d'authentification", response)
+      }
     }
     catch (error) {
       console.error(`Erreurs dans le formulaire:`, error)
@@ -79,7 +90,7 @@ export function LoginModal(props: LoginModalProps) {
                 <div className="relative">
                   <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-left">Mot de passe</label>
                   <input type={showPassword ? "text" : "password"} name="password" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required onChange={handleChange} />
-                  <i className="far fa-regular fa-eye-slash absolute top-1/2 right-3 transform -translate-y-1/2" onClick={togglePasswordVisibility}></i>
+                  <i className="fa-regular fa-eye" onClick={togglePasswordVisibility}></i>
                 </div>
                 <div className="flex justify-between">
                   <a href="#" className="text-custom-15616D text-sm hover:underline">Mot de passe oublié?</a>
