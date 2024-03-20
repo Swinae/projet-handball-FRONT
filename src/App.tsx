@@ -36,10 +36,11 @@ function App() {
 
   return (
     <>
-      <header>
-        <div className='div-up'>
+      <header className='bg-custom-15616D'>
+        <div className='flex justify-between items-center'>
           <ClubIdentity />
-          <div className='div-user-login'>
+          <div className='flex gap-4'>
+            <SignupModal />
             { (userRole === "admin" || userRole === "joueur" || userRole === "supporter")&&<Person avatar={userDataFromServer?.avatar} firstname={userDataFromServer?.firstname} lastname={userDataFromServer?.lastname} role={userDataFromServer?.role} />}
             <LoginModal handleRole={handleRole} handleUserDataFromServer={handleUserDataFromServer} />
           </div>
