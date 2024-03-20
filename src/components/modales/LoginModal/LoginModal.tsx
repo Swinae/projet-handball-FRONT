@@ -85,11 +85,11 @@ export function LoginModal(props: LoginModalProps) {
               <form className="space-y-4" action="#" onSubmit={handleSubmit}>
                 <div>
                   <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-left">Email</label>
-                  <input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required onChange={handleChange} />
+                  <input type="email" name="email" id="email-login" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required onChange={handleChange} />
                 </div>
                 <div className="relative">
                   <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-left">Mot de passe</label>
-                  <input type={showPassword ? "text" : "password"} name="password" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required onChange={handleChange} />
+                  <input type={showPassword ? "text" : "password"} name="password" id="password-login" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required onChange={handleChange} />
                   <i className="fa-regular fa-eye" onClick={togglePasswordVisibility}></i>
                 </div>
                 <div className="flex justify-between">
