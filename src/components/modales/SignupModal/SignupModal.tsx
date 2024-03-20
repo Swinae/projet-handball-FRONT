@@ -1,10 +1,11 @@
 import { useFormik } from "formik"
-import { ISignupForm } from "../../services/interfaces/SignupForm";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as yup from 'yup';
 import YupPassword from 'yup-password';
 YupPassword(yup);
 import './SignupModal.css'
+import { ISignupForm } from "../../../services/interfaces/SignupForm";
+import { users } from '../LoginModal/faker'
 
 export default function SignupModal() {
     const [form, setForm] = useState<ISignupForm>({
@@ -12,27 +13,43 @@ export default function SignupModal() {
         password: '',
         confirm: ''
     })
-    
+
+    const [newUser, setNewUser] = useState<any>({
+        id: users.length + 1,
+        role: 'Supporter',
+        firstname: 'test',
+        lastname: 'test',
+        email: '',
+        password: '',
+        avatar: "avatar_default.jpg",
+    })
+
     let signupSchema = yup.object({
         email: yup.string().email('Le format de l\'email est invalide').required('Veuillez renseigner votre adresse mail'),
         password: yup.string()
-        .min(8,'Le mot de passe doit comporter 8 caractères minimum')
-        .required('Veuillez renseigner un mot de passe')
-        .minLowercase(1, 'Le mot de passe doit contenir 1 minuscule minimum')
-        .minUppercase(1, 'Le mot de passe doit contenir 1 majuscule minimum')
-        .minNumbers(1, 'Le mot de passe doit contenir 1 chiffre minimum')
-        .minSymbols(1, 'Le mot de passe doit contenir 1 symbole minimum'),
+            .min(8, 'Le mot de passe doit comporter 8 caractères minimum')
+            .required('Veuillez renseigner un mot de passe')
+            .minLowercase(1, 'Le mot de passe doit contenir 1 minuscule minimum')
+            .minUppercase(1, 'Le mot de passe doit contenir 1 majuscule minimum')
+            .minNumbers(1, 'Le mot de passe doit contenir 1 chiffre minimum')
+            .minSymbols(1, 'Le mot de passe doit contenir 1 symbole minimum'),
         confirm: yup.string().oneOf([yup.ref('password')], 'Les deux mots de passe ne correspondent pas').required('Veuillez confirmer le mot de passe'),
     });
 
-    const { handleSubmit, handleChange, values, errors } = useFormik({
+    const { handleSubmit, handleChange, values, errors} = useFormik({
         initialValues: form,
         validationSchema: signupSchema,
         onSubmit: values => {
-            console.log(values);
-        },
+            setNewUser({...newUser, id: users.length + 1, email: values.email, password: values.password})
+        }
     })
 
+    useEffect(() => {
+        if (newUser.email && newUser.password) {
+            users.push(newUser);
+            console.log(users);
+        }
+    }, [newUser]);
 
     return (
         <>
@@ -54,22 +71,22 @@ export default function SignupModal() {
                         </div>
                         {/* Modal body */}
                         <div className="p-4 md:p-5">
-                            <form onSubmit={ handleSubmit } className="space-y-4" action="#">
+                            <form onSubmit={handleSubmit} className="space-y-4" action="#">
                                 <div>
                                     <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 ">Adresse email</label>
-                                    <input onChange={ handleChange } value={ values.email } type="email" name="email" id="email-signup" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="exemple@gmail.com" />
+                                    <input onChange={handleChange} value={values.email} type="email" name="email" id="email-signup" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="exemple@gmail.com" />
                                 </div>
                                 {errors.email && <div className="error">{errors.email}</div>}
 
                                 <div>
                                     <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 ">Mot de passe</label>
-                                    <input onChange={ handleChange } value={ values.password } type="password" name="password" id="password-signup" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2."/>
+                                    <input onChange={handleChange} value={values.password} type="password" name="password" id="password-signup" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2." />
                                 </div>
                                 {errors.password && <div className="error">{errors.password}</div>}
 
                                 <div>
                                     <label htmlFor="confirm" className="block mb-2 text-sm font-medium text-gray-900 ">Confirmer le mot de passe</label>
-                                    <input onChange={ handleChange } value={ values.confirm } type="password" name="confirm" id="confirm-signup" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
+                                    <input onChange={handleChange} value={values.confirm} type="password" name="confirm" id="confirm-signup" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
                                 </div>
                                 {errors.confirm && <div className="error">{errors.confirm}</div>}
 

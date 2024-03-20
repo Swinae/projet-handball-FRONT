@@ -7,7 +7,7 @@ import { ClubIdentity } from './components/ClubIdentity/ClubIdentity';
 import { ClubBanners } from './components/ClubBanners/ClubBanners';
 import { NotFoundPage } from './services/utils/NotFoundPage';
 import { Person } from './components/Person/Person';
-import SignupModal from './components/modales/SignupModal';
+import SignupModal from './components/modales/SignupModal/SignupModal';
 
 interface dataUser{
   id:string,
