@@ -1,5 +1,5 @@
 import { useFormik } from "formik"
-import { ISignupForm } from "../../services/interfaces/SignupForm";
+import { ISignupForm } from "../../../services/interfaces/SignupForm";
 import { useState } from "react";
 import * as yup from 'yup';
 import YupPassword from 'yup-password';

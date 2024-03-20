@@ -7,7 +7,7 @@ import { checkAuthentification } from "../../../services/api/checkAuthentificati
 
 
 export function LoginModal(props: LoginModalProps) {
-  const { handleRole,handleUserDataFromServer } = props;
+  const { handleUserDataFromServer } = props;
 
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
@@ -57,7 +57,6 @@ export function LoginModal(props: LoginModalProps) {
         handleUserDataFromServer(response);
         
         setIsAuthenticated(true);
-        handleRole(response.role)
       }
       else {
         console.log("erreur d'authentification", response)

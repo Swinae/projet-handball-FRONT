@@ -7,7 +7,7 @@ import { ClubIdentity } from './components/ClubIdentity/ClubIdentity';
 import { ClubBanners } from './components/ClubBanners/ClubBanners';
 import { NotFoundPage } from './services/utils/NotFoundPage';
 import { Person } from './components/Person/Person';
-import SignupModal from './components/modales/SignupModal';
+import SignupModal from './components/modales/SignupModal/SignupModal';
 
 interface dataUser{
   id:string,
@@ -22,17 +22,15 @@ interface dataUser{
 function App() {
   const [userRole, setUserRole] = useState<string>("");
 
-  //function to get userRole
-  function handleRole(role: string): void {
-    setUserRole(role);
-  }
-
   //userDataFromServer
   const [userDataFromServer, setUserDataFromServer] = useState<dataUser>();
 
   //function to redefine userDataFromServer
   function handleUserDataFromServer(userDataFromServer:dataUser):void{
     setUserDataFromServer(userDataFromServer);
+
+    //redefine role in state userRole
+    setUserRole(userDataFromServer.role)
   }
 
   return (
@@ -43,7 +41,7 @@ function App() {
           <div className='flex gap-4'>
             <SignupModal />
             { (userRole === "admin" || userRole === "joueur" || userRole === "supporter")&&<Person avatar={userDataFromServer?.avatar} firstname={userDataFromServer?.firstname} lastname={userDataFromServer?.lastname} role={userDataFromServer?.role} />}
-            <LoginModal handleRole={handleRole} handleUserDataFromServer={handleUserDataFromServer} />
+            <LoginModal handleUserDataFromServer={handleUserDataFromServer} />
           </div>
         </div>
         <NavBar userRole={userRole} />
