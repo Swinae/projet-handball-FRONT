@@ -1,3 +1,4 @@
 export interface LoginModalProps {
-  handleRole: () => void;
+  handleRole: (role:string) => void;
+  handleUserDataFromServer:(userDataFromServer:any)=>void;
 }
