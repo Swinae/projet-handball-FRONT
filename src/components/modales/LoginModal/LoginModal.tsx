@@ -17,14 +17,14 @@ export function LoginModal(props: LoginModalProps) {
   };
 
   const [userInfos, setUserInfos] = useState<DataConnexion>({
-    email: "",
-    password: ""
+    emailLogin: "",
+    passwordLogin: ""
   })
 
   //define a schema with yup
   const validationSchema = yup.object().shape({
-    email: yup.string().email(`L'email doit être valide`).required(`L'email est requis !`),
-    password: yup.string().min(8, "Il faut minimum 8 caractères").required("Le mot de passe est requis !")
+    emailLogin: yup.string().email(`L'email doit être valide`).required(`L'email est requis !`),
+    passwordLogin: yup.string().min(8, "Il faut minimum 8 caractères").required("Le mot de passe est requis !")
   })
 
   //get change in input email and password
@@ -83,12 +83,12 @@ export function LoginModal(props: LoginModalProps) {
             <div className="p-4 md:p-5">
               <form className="space-y-4" action="#" onSubmit={handleSubmit}>
                 <div>
-                  <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-left">Email</label>
-                  <input type="email" name="email" id="email-login" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required onChange={handleChange} />
+                  <label htmlFor="email-login" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-left">Email</label>
+                  <input type="email" name="emailLogin" id="email-login" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required onChange={handleChange} />
                 </div>
                 <div className="relative">
-                  <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-left">Mot de passe</label>
-                  <input type={showPassword ? "text" : "password"} name="password" id="password-login" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required onChange={handleChange} />
+                  <label htmlFor="password-login" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-left">Mot de passe</label>
+                  <input type={showPassword ? "text" : "password"} name="passwordLogin" id="password-login" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required onChange={handleChange} />
                   <i className="fa-regular fa-eye" onClick={togglePasswordVisibility}></i>
                 </div>
                 <div className="flex justify-between">

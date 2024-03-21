@@ -56,19 +56,19 @@ export default function SignupModal() {
                         <div className="p-4 md:p-5">
                             <form onSubmit={ handleSubmit } className="space-y-4" action="#">
                                 <div>
-                                    <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 ">Adresse email</label>
-                                    <input onChange={ handleChange } value={ values.email } type="email" name="email" id="email-signup" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="exemple@gmail.com" />
+                                    <label htmlFor="email-signup" className="block mb-2 text-sm font-medium text-gray-900 ">Adresse email</label>
+                                    <input onChange={ handleChange } value={ values.email } type="email" name="email" id="email-signup" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="exemple@gmail.com" autoComplete="email" />
                                 </div>
                                 {errors.email && <div className="error">{errors.email}</div>}
 
                                 <div>
-                                    <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 ">Mot de passe</label>
+                                    <label htmlFor="password-signup" className="block mb-2 text-sm font-medium text-gray-900 ">Mot de passe</label>
                                     <input onChange={ handleChange } value={ values.password } type="password" name="password" id="password-signup" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2."/>
                                 </div>
                                 {errors.password && <div className="error">{errors.password}</div>}
 
                                 <div>
-                                    <label htmlFor="confirm" className="block mb-2 text-sm font-medium text-gray-900 ">Confirmer le mot de passe</label>
+                                    <label htmlFor="confirm-signup" className="block mb-2 text-sm font-medium text-gray-900 ">Confirmer le mot de passe</label>
                                     <input onChange={ handleChange } value={ values.confirm } type="password" name="confirm" id="confirm-signup" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
                                 </div>
                                 {errors.confirm && <div className="error">{errors.confirm}</div>}

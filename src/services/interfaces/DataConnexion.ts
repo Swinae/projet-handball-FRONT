@@ -1,4 +1,4 @@
 export interface DataConnexion {
-  email:string;
-  password:string;
+  emailLogin:string;
+  passwordLogin:string;
 }

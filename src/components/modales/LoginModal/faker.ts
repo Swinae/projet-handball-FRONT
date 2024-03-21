@@ -4,8 +4,8 @@ export const users=[
     role:'admin',
     firstname:'amine',
     lastname:'serra',
-    email:"amine.serra@hotmail.fr",
-    password:"Azerty0.",
+    emailLogin:"amine.serra@hotmail.fr",
+    passwordLogin:"Azerty0.",
     avatar:"avatar_default.jpg",   
   },
   {
@@ -13,8 +13,8 @@ export const users=[
     role:'joueur',
     firstname:'romain',
     lastname:'doe',
-    email:"romain.doe@hotmail.fr",
-    password:"Azerty1.",
+    emailLogin:"romain.doe@hotmail.fr",
+    passwordLogin:"Azerty1.",
     avatar:"avatar_default.jpg",   
   },
   {
@@ -22,8 +22,8 @@ export const users=[
     role:'supporter',
     firstname:'john',
     lastname:'doe',
-    email:"john.doe@hotmail.fr",
-    password:"Azerty2.",
+    emailLogin:"john.doe@hotmail.fr",
+    passwordLogin:"Azerty2.",
     avatar:"avatar_default.jpg",   
   }
 ]

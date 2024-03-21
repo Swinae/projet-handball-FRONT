@@ -4,12 +4,11 @@ import { useState } from 'react';
 import { LoginModal } from './components/modales/LoginModal/LoginModal';
 import { NavBar } from './components/Navbar/NavBar';
 import { ClubIdentity } from './components/ClubIdentity/ClubIdentity';
-import { ClubBanners } from './components/ClubBanners/ClubBanners';
 import { NotFoundPage } from './services/utils/NotFoundPage';
 import { Person } from './components/Person/Person';
 import SignupModal from './components/modales/SignupModal/SignupModal';
-import { FooterDivider } from 'flowbite-react';
 import { FooterDown } from './components/FooterDown/FooterDown';
+import { NewsPage } from './pages/News/NewsPage';
 
 interface dataUser{
   id:string,
@@ -47,13 +46,12 @@ function App() {
           </div>
         </div>
         <NavBar userRole={userRole} />
-        <ClubBanners />
       </header>
 
       <main>
         <Routes>
           <Route path='/' element />
-          <Route path='/actualités' element />
+          <Route path='/actualités' element={<NewsPage/>} />
           <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </main>
