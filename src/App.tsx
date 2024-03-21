@@ -8,6 +8,8 @@ import { ClubBanners } from './components/ClubBanners/ClubBanners';
 import { NotFoundPage } from './services/utils/NotFoundPage';
 import { Person } from './components/Person/Person';
 import SignupModal from './components/modales/SignupModal/SignupModal';
+import { FooterDivider } from 'flowbite-react';
+import { FooterDown } from './components/FooterDown/FooterDown';
 
 interface dataUser{
   id:string,
@@ -48,11 +50,17 @@ function App() {
         <ClubBanners />
       </header>
 
-      <Routes>
-        <Route path='/' element />
-        <Route path='/news' element />
-        <Route path='*' element={<NotFoundPage />} />
-      </Routes>
+      <main>
+        <Routes>
+          <Route path='/' element />
+          <Route path='/actualités' element />
+          <Route path='*' element={<NotFoundPage />} />
+        </Routes>
+      </main>
+
+      <footer>
+        <FooterDown/>
+      </footer>
     </>
   )
 }
