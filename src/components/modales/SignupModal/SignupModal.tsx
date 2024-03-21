@@ -1,10 +1,11 @@
 import { useFormik } from "formik"
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import * as yup from 'yup';
 import YupPassword from 'yup-password';
 YupPassword(yup);
 import './SignupModal.css'
 import { ISignupForm } from "../../../services/interfaces/SignupForm";
+import IUserInterface from "../../../services/interfaces/UserInterface";
 import { users } from '../LoginModal/faker'
 
 export default function SignupModal() {
@@ -14,7 +15,7 @@ export default function SignupModal() {
         confirm: ''
     })
 
-    const [newUser, setNewUser] = useState<any>({
+    const [newUser, setNewUser] = useState<IUserInterface>({
         id: users.length + 1,
         role: 'Supporter',
         firstname: 'test',
@@ -39,17 +40,17 @@ export default function SignupModal() {
     const { handleSubmit, handleChange, values, errors} = useFormik({
         initialValues: form,
         validationSchema: signupSchema,
-        onSubmit: values => {
-            setNewUser({...newUser, id: users.length + 1, email: values.email, password: values.password})
+        onSubmit:  values => {
+            const updatedUser = {
+                ...newUser,
+                id: users.length + 1,
+                email: values.email,
+                password: values.password
+            };
+            
+            users.push(updatedUser);
         }
     })
-
-    useEffect(() => {
-        if (newUser.email && newUser.password) {
-            users.push(newUser);
-            console.log(users);
-        }
-    }, [newUser]);
 
     return (
         <>
