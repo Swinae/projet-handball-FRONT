@@ -7,6 +7,7 @@ import './SignupModal.css'
 import { ISignupForm } from "../../../services/interfaces/SignupForm";
 import IUserInterface from "../../../services/interfaces/UserInterface";
 import { users } from '../LoginModal/faker'
+import { addUser } from "../../../services/api/addUser";
 
 export default function SignupModal() {
     const [form, setForm] = useState<ISignupForm>({
@@ -37,18 +38,29 @@ export default function SignupModal() {
         confirm: yup.string().oneOf([yup.ref('password')], 'Les deux mots de passe ne correspondent pas').required('Veuillez confirmer le mot de passe'),
     });
 
-    const { handleSubmit, handleChange, values, errors} = useFormik({
+    const { handleSubmit, handleChange, values, errors } = useFormik({
         initialValues: form,
         validationSchema: signupSchema,
-        onSubmit:  values => {
+        onSubmit: values => {
             const updatedUser = {
                 ...newUser,
                 id: users.length + 1,
                 email: values.email,
                 password: values.password
             };
-            
-            users.push(updatedUser);
+
+            const userAlreadyExist = users.find((user) => user.email === updatedUser.email)
+            if (userAlreadyExist === undefined) {
+                try {
+                    addUser(updatedUser)
+                
+                } catch (error) {
+                    console.log(error)
+                }
+
+            } else {
+                console.log('User already exist')
+            }
         }
     })
 
