@@ -67,7 +67,7 @@ export default function SignupModal() {
     return (
         <>
             {/* Modal toggle */}
-            <button data-modal-target="signup-modal" data-modal-toggle="signup-modal" className="block text-white hover:underline font-medium  text-sm px-5 py-2.5 text-center" type="button">
+            <button data-modal-target="signup-modal" data-modal-toggle="signup-modal" className="block text-white hover:underline font-medium  text-sm text-center" type="button">
                 Créer un compte
             </button>
 
