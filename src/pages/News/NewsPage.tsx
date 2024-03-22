@@ -3,16 +3,13 @@ import { useEffect, useState } from "react";
 import { NewData } from "../../services/interfaces/NewData";
 import { getNewsList } from "../../services/api/getNewsList";
 
-//faker
-import { listNews } from "../../pages/News/faker";
-
 export function NewsPage() {
   const [newsList, setNewsList] = useState<NewData[]>()
 
   useEffect(()=>{
     const handleNewsList=async()=>{
       try{
-        const newsListFromServer=await getNewsList(listNews);
+        const newsListFromServer=await getNewsList();
         setNewsList(newsListFromServer);
 
         //store data in localstorage
