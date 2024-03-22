@@ -1,4 +1,4 @@
-const eventFaker = [
+export const eventFaker = [
     {
         img: 'https://picsum.photos/400/200',
         title: 'Article 1',
