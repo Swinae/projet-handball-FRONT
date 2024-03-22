@@ -12,8 +12,11 @@ export function NewsPage() {
   useEffect(()=>{
     const handleNewsList=async()=>{
       try{
-        const newsListFromServer=await getNewsList(listNews)
+        const newsListFromServer=await getNewsList(listNews);
         setNewsList(newsListFromServer);
+
+        //store data in localstorage
+        localStorage.setItem("listNews",JSON.stringify(newsListFromServer));
       }
       catch(error){
         console.error("Une erreur s'est produite:",error);

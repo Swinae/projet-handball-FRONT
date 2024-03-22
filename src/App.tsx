@@ -9,6 +9,7 @@ import { Person } from './components/Person/Person';
 import SignupModal from './components/modales/SignupModal/SignupModal';
 import { FooterDown } from './components/FooterDown/FooterDown';
 import { NewsPage } from './pages/News/NewsPage';
+import { NewDetailsPage } from './pages/News/NewDetailsPage';
 
 interface dataUser{
   id:string,
@@ -52,6 +53,7 @@ function App() {
         <Routes>
           <Route path='/' element />
           <Route path='/actualités' element={<NewsPage/>} />
+          <Route path='/actualités/detail/:idNew' element={<NewDetailsPage/>} />
           <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </main>
