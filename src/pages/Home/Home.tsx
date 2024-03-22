@@ -1,4 +1,4 @@
-import NewsCarousel from "../../components/Carousel/NewsCarousel";
+import { NewsCarousel } from "../../components/Carousel/NewsCarousel";
 import { ClubBanners } from "../../components/ClubBanners/ClubBanners";
 
 export default function HomePage() {
@@ -6,6 +6,9 @@ export default function HomePage() {
         <>
             <ClubBanners />
             <NewsCarousel />
+            <div>
+                test
+            </div>
         </>
     )
 }

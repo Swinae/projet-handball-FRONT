@@ -8,6 +8,7 @@ import { NotFoundPage } from './services/utils/NotFoundPage';
 import { Person } from './components/Person/Person';
 import SignupModal from './components/modales/SignupModal/SignupModal';
 import HomePage from './pages/Home/Home';
+import EventsPage from './pages/Events/Events';
 
 interface dataUser {
   id: string,
@@ -52,6 +53,7 @@ function App() {
         <Routes>
           <Route path='/' element={<HomePage />} />
           <Route path='/news' element />
+          <Route path='/évènements' element={<EventsPage />} />
           <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </main>
