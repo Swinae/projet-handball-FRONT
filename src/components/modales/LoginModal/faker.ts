@@ -6,7 +6,8 @@ export const users=[
     lastname:'serra',
     emailLogin:"amine.serra@hotmail.fr",
     passwordLogin:"Azerty0.",
-    avatar:"avatar_default.jpg",   
+    avatar:"avatar_default.jpg",
+    token:"00"
   },
   {
     id:2,
@@ -15,7 +16,8 @@ export const users=[
     lastname:'doe',
     emailLogin:"romain.doe@hotmail.fr",
     passwordLogin:"Azerty1.",
-    avatar:"avatar_default.jpg",   
+    avatar:"avatar_default.jpg",
+    token:"11"   
   },
   {
     id:3,
@@ -24,6 +26,7 @@ export const users=[
     lastname:'doe',
     emailLogin:"john.doe@hotmail.fr",
     passwordLogin:"Azerty2.",
-    avatar:"avatar_default.jpg",   
+    avatar:"avatar_default.jpg",
+    token:"22"   
   }
 ]

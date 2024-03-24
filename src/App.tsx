@@ -18,11 +18,18 @@ interface dataUser{
   lastname:string,
   email:string,
   password:string,
-  avatar:string, 
+  avatar:string,
+  token:string 
 }
 
 function App() {
   const [userRole, setUserRole] = useState<string>("");
+  
+  //function to redifine userRole
+  function redifineUserRole(role:string){
+    //redefine role in state userRole
+    setUserRole(role)
+  }
 
   //userDataFromServer
   const [userDataFromServer, setUserDataFromServer] = useState<dataUser>();
@@ -30,9 +37,6 @@ function App() {
   //function to redefine userDataFromServer
   function handleUserDataFromServer(userDataFromServer:dataUser):void{
     setUserDataFromServer(userDataFromServer);
-
-    //redefine role in state userRole
-    setUserRole(userDataFromServer.role)
   }
 
   return (
@@ -41,9 +45,8 @@ function App() {
         <div className='flex justify-between items-center'>
           <ClubIdentity />
           <div className='flex gap-4'>
-            <SignupModal />
-            { (userRole === "admin" || userRole === "joueur" || userRole === "supporter")&&<Person avatar={userDataFromServer?.avatar} firstname={userDataFromServer?.firstname} lastname={userDataFromServer?.lastname} role={userDataFromServer?.role} />}
-            <LoginModal handleUserDataFromServer={handleUserDataFromServer} />
+            { (userRole === "admin" || userRole === "joueur" || userRole === "supporter")?<Person avatar={userDataFromServer?.avatar} firstname={userDataFromServer?.firstname} lastname={userDataFromServer?.lastname} role={userDataFromServer?.role} />:<SignupModal/>}
+            <LoginModal handleUserDataFromServer={handleUserDataFromServer} redifineUserRole={redifineUserRole} />
           </div>
         </div>
         <NavBar userRole={userRole} />
