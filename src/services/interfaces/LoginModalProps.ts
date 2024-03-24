@@ -1,4 +1,4 @@
 export interface LoginModalProps {
-  handleUserDataFromServer:(userDataFromServer:any)=>void;
-  redifineUserRole:(userDataFromServer:any)=>void;
+  handleUserData:(data:any)=>void;
+  redifineUserRole:(role:any)=>void;
 }

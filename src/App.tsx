@@ -31,12 +31,12 @@ function App() {
     setUserRole(role)
   }
 
-  //userDataFromServer
-  const [userDataFromServer, setUserDataFromServer] = useState<dataUser>();
+  //userData
+  const [userData, setUserData] = useState<dataUser>();
 
-  //function to redefine userDataFromServer
-  function handleUserDataFromServer(userDataFromServer:dataUser):void{
-    setUserDataFromServer(userDataFromServer);
+  //function to redefine userData
+  function handleUserData(data:dataUser):void{
+    setUserData(data);
   }
 
   return (
@@ -45,8 +45,8 @@ function App() {
         <div className='flex justify-between items-center'>
           <ClubIdentity />
           <div className='flex gap-4'>
-            { (userRole === "admin" || userRole === "joueur" || userRole === "supporter")?<Person avatar={userDataFromServer?.avatar} firstname={userDataFromServer?.firstname} lastname={userDataFromServer?.lastname} role={userDataFromServer?.role} />:<SignupModal/>}
-            <LoginModal handleUserDataFromServer={handleUserDataFromServer} redifineUserRole={redifineUserRole} />
+            { (userRole === "admin" || userRole === "joueur" || userRole === "supporter")?<Person avatar={userData?.avatar} firstname={userData?.firstname} lastname={userData?.lastname} role={userData?.role} />:<SignupModal/>}
+            <LoginModal handleUserData={handleUserData} redifineUserRole={redifineUserRole} />
           </div>
         </div>
         <NavBar userRole={userRole} />

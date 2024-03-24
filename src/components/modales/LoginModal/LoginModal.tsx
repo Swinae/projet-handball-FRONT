@@ -6,9 +6,8 @@ import { DataConnexion } from "../../../services/interfaces/DataConnexion";
 import { checkAuthentification } from "../../../services/api/checkAuthentification";
 import { BtnDisconect } from "../../BtnDisconnect/BtnDisconect";
 
-
 export function LoginModal(props: LoginModalProps) {
-  const { handleUserDataFromServer, redifineUserRole } = props;
+  const { handleUserData, redifineUserRole } = props;
 
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
@@ -21,14 +20,8 @@ export function LoginModal(props: LoginModalProps) {
     emailLogin: "",
     passwordLogin: ""
   })
-
-  //define a schema with yup
-  const validationSchema = yup.object().shape({
-    emailLogin: yup.string().email(`L'email doit être valide`).required(`L'email est requis !`),
-    passwordLogin: yup.string().min(8, "Il faut minimum 8 caractères").required("Le mot de passe est requis !")
-  })
-
-  //get change in input email and password
+  
+  //function to recovery change in input email and password
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setUserInfos({
@@ -36,6 +29,12 @@ export function LoginModal(props: LoginModalProps) {
       [name]: value
     })
   }
+
+  //define a schema with yup
+  const validationSchema = yup.object().shape({
+    emailLogin: yup.string().email(`L'email doit être valide`).required(`L'email est requis !`),
+    passwordLogin: yup.string().min(8, "Il faut minimum 8 caractères").required("Le mot de passe est requis !")
+  })
 
   const [isAuthentificated, setIsAuthenticated] = useState<boolean>(false);
   
@@ -49,7 +48,7 @@ export function LoginModal(props: LoginModalProps) {
     e.preventDefault();
     console.log("données à soumettre:", userInfos);
 
-    //check register data
+    //check with yup register data
     try {
       const userData = await validationSchema.validate(userInfos, { abortEarly: false })
       console.log('Le formulaire est validé:', userData)
@@ -63,7 +62,7 @@ export function LoginModal(props: LoginModalProps) {
         localStorage.setItem("userToken",response.token);
 
         //redifine UserDataFromServer
-        handleUserDataFromServer(response);
+        handleUserData(response);
 
         //redifine userRole
         redifineUserRole(response.role);

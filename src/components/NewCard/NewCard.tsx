@@ -22,11 +22,11 @@ export function NewCard(props: NewCardProps) {
   }
 
   return (
-    <div className='grid grid-cols-3 my-12 mx-12'>
+    <div className='grid grid-cols-3 gap-8 my-8'>
       {NewsList && NewsList.map((itemNew) => (
         <Card
           key={itemNew.id}
-          className="mx-auto min-w-96 max-w-96 mb-10"
+          className="min-w-96 max-w-96 mx-auto"
           imgAlt={`image reflétant le titre: ${itemNew.title} de l'actualité`} 
           imgSrc={itemNew.img}
         >
