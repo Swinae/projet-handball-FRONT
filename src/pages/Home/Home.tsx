@@ -6,9 +6,6 @@ export default function HomePage() {
         <>
             <ClubBanners />
             <NewsCarousel />
-            <div>
-                test
-            </div>
         </>
     )
 }
