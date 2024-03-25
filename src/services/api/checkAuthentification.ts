@@ -9,5 +9,5 @@ export async function checkAuthentification(userLoginData: DataConnexion):Promis
   const userFound=users.find((user) => user.email === userLoginData.emailLogin && user.password === userLoginData.passwordLogin )
   //const response = await api.post(`/api/auth/login`,userLoginData);
   //console.log(response);
-  return userFound? userFound:null;
+  return userFound? userFound:undefined;
 }
