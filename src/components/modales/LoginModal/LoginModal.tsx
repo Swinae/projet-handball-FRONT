@@ -55,11 +55,13 @@ export function LoginModal(props: LoginModalProps) {
 
       //use useApi
       const response = await checkAuthentification(userData);
-      if (response != undefined) {
+      if (response !== undefined) {
         console.log("response:", response);
-        
-        //stockage user token in localstorage 
-        localStorage.setItem("userToken",response.token);
+
+        const {id,token}=response;
+
+        //stockage user token & id in localstorage
+        localStorage.setItem("userData", JSON.stringify({ id, token }));
 
         //redifine UserDataFromServer
         handleUserData(response);

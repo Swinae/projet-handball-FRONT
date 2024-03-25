@@ -11,12 +11,9 @@ export function NewsPage() {
       try{
         const newsListFromServer=await getNewsList();
         setNewsList(newsListFromServer);
-
-        //store data in localstorage
-        localStorage.setItem("listNews",JSON.stringify(newsListFromServer));
       }
       catch(error){
-        console.error("Une erreur s'est produite:",error);
+        console.error("La requête a échoué",error);
       }
     }
     handleNewsList();

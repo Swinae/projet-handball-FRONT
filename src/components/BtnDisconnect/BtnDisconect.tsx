@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { disconectedUser } from '../../services/api/disconectedUser';
+import { dataUser } from '../../services/interfaces/dataUser';
 
 interface BtnDisconectProps{
   statut:string;
@@ -14,17 +15,20 @@ export function BtnDisconect(props:BtnDisconectProps){
   
   async function handleDisconect(){
     // to recover in localstorage token user
-    const userToken=localStorage.getItem("userToken");
+    let userDataString=localStorage.getItem("userData");
 
-    if(userToken){
+    if(userDataString){
+      let userData=JSON.parse(userDataString) as dataUser;
+      console.log(userData);
+
       //request
-      const response=await disconectedUser(userToken);
+      const response=await disconectedUser(userData);
       if(response!=undefined){
         redifineUserRole("visteur");
         redifineIsAuthentificated(false);
         
-        //remove userToken inlocalStorage
-        localStorage.removeItem("userToken");
+        //remove userData inlocalStorage
+        localStorage.removeItem("userData");
 
         //rediction to homepage
         navigate("/");
