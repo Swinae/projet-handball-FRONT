@@ -1,3 +1,8 @@
+header > *,
+main > *{
+  padding:  0px 10%;
+}
+
 header{
   background-color: #15616D;
 }

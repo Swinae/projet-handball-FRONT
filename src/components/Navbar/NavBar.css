@@ -1,8 +1,7 @@
 nav{
   margin-top: 1rem;
-  padding-left: 5rem;
   padding-top: 1rem;
   padding-bottom: 1rem;
   display: flex;
-  gap: 8rem;
+  gap: 2rem;
 }
