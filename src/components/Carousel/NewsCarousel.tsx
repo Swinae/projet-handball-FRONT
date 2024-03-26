@@ -3,21 +3,21 @@ import { getNewsList } from '../../services/api/getNewsList';
 import { NewData } from '../../services/interfaces/NewData';
 import './NewsCarousel.css'
 
-export function NewsCarousel() {
+export function NewsCarousel(): JSX.Element  {
 
-    const [news, setNews] = useState<any>([])
+    const [news, setNews] = useState<NewData[]>([])
 
     useEffect(() => {
         async function loadNews() {
-            const newsList = await getNewsList()
+            const newsList: NewData[] = await getNewsList()
             setNews(newsList)
         }
 
         loadNews()
     }, [])
 
-    const lastNews = news.slice(news.length - 5, news.length - 1).reverse()
-    const lastNewsItem = news[news.length - 1]
+    const lastNews: NewData[]= news.slice(news.length - 5, news.length - 1).reverse()
+    const lastNewsItem: NewData | undefined = news[news.length - 1]
     console.log(lastNewsItem);
 
 
