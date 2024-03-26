@@ -12,6 +12,7 @@ import HomePage from './pages/Home/Home';
 import { FooterDown } from './components/FooterDown/FooterDown';
 import { NewsPage } from './pages/News/NewsPage';
 import { NewDetailsPage } from './pages/News/NewDetailsPage';
+import DashboardPage from './pages/Dashboard/DashboardPage';
 
 interface dataUser{
   id:string,
@@ -56,10 +57,10 @@ function App() {
       <main>
         <Routes>
           <Route path='/' element={<HomePage />} />
-          <Route path='/news' element />
-          <Route path='/évènements' element={<EventsPage />} />
           <Route path='/actualités' element={<NewsPage/>} />
           <Route path='/actualités/detail/:idNew' element={<NewDetailsPage/>} />
+          <Route path='/évènements' element={<EventsPage />} />
+          <Route path='/dashboard' element={<DashboardPage />} />
           <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </main>
