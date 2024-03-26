@@ -4,8 +4,9 @@ import { useEffect, useState } from "react";
 import { NewData } from "../../../services/interfaces/NewData";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { ModalCreateNews } from "../../modales/ModalCreatesNews/ModalCreateNews";
 
-export function NewTab() {
+export function NewsTab() {
   const [newsList, setNewsList] = useState<NewData[]>([]);
   const [startIndex, setStartIndex] = useState<number>(0);
   const newsNbrPerPage:number = 4;
@@ -36,12 +37,9 @@ export function NewTab() {
 
   return (
     <div className="overflow-x-auto mb-6">
+      <ModalCreateNews/>
 
-      <button className="bg-custom-FF7D00 text-white rounded-lg p-1 mb-6">
-        Créer une nouvelle actualité
-      </button>
-
-      <Table hoverable className="min-w-96">
+      <Table className="min-w-96" hoverable>
         <TableHead className="text-white">
           <TableHeadCell className='bg-custom-15616D' >Titre</TableHeadCell>
           <TableHeadCell className='bg-custom-15616D w-1/6' >Date de publication</TableHeadCell>
@@ -52,10 +50,13 @@ export function NewTab() {
           {visibleNewsList?.map((art) => {
             return (
               <TableRow key={art.id} className="bg-white dark:border-gray-700 dark:bg-gray-800">
+
                 <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
                   {art.title}
                 </TableCell>
+                
                 <TableCell className="text-black text-center">{art.createdAt}</TableCell>
+                
                 <TableCell>
                   <div className="flex justify-between gap-">
                     <button className='bg-custom-15616D text-white p-1 rounded-md mr-1' type='button'>
@@ -67,11 +68,11 @@ export function NewTab() {
                     </button>
                   </div>
                 </TableCell>
+
               </TableRow>
             );
           })}
         </TableBody>
-
       </Table>
 
       <div className='flex justify-between mt-4'>

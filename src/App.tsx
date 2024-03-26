@@ -56,18 +56,16 @@ function App() {
       <main>
         <Routes>
           <Route path='/' element={<HomePage />} />
-          <Route path='/news' element />
-          <Route path='/évènements' element={<EventsPage />} />
           <Route path='/actualités' element={<NewsPage/>} />
           <Route path='/actualités/detail/:idNew' element={<NewDetailsPage/>} />
+          <Route path='/évènements' element={<EventsPage />} />
           <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </main>
-    
-    <footer>
+      
+      <footer >
         <FooterDown/>
       </footer>
-
     </>
   )
 }
