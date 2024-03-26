@@ -64,11 +64,10 @@ function App() {
           <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </main>
-    
-    <footer>
+      
+      <footer >
         <FooterDown/>
       </footer>
-
     </>
   )
 }
