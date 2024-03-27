@@ -3,5 +3,8 @@ export default interface IEventInterface {
     title: string,
     description: string,
     category: string,
-    date: string
+    date: string,
+    location: string,
+    start_time: string,
+    end_time: string,
 }

@@ -29,8 +29,6 @@ export default function DashboardPage() {
                     control the content visibility and styling.
                 </Tabs.Item>
             </Tabs>
-
-
         </>
     )
 }
