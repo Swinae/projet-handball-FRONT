@@ -8,7 +8,9 @@ import { ModalCreateNews } from "../../modales/ModalCreatesNews/ModalCreateNews"
 
 export function NewsTab() {
   const [newsList, setNewsList] = useState<NewData[]>([]);
+  
   const [startIndex, setStartIndex] = useState<number>(0);
+  
   const newsNbrPerPage:number = 4;
 
   useEffect(() => {
@@ -25,7 +27,14 @@ export function NewsTab() {
     getNewsListRequest();
   }, [])
 
+  //extract element quantity to show them in TableBody
   const visibleNewsList: NewData[] | undefined = newsList?.slice(startIndex, startIndex + newsNbrPerPage);
+  
+  const addArtInNewsList=(newArt:any)=>{
+    setNewsList([
+      newArt,...newsList
+    ]);
+  }
 
   const handleNext = () => {
     setStartIndex(startIndex + newsNbrPerPage);
@@ -33,11 +42,14 @@ export function NewsTab() {
 
   const handlePrevious=()=>{
     setStartIndex(Math.max(0, startIndex - newsNbrPerPage));
+    console.log(Math.max(0, startIndex - newsNbrPerPage))
+    if(Math.max(0, startIndex - newsNbrPerPage)===0){
+    }
   }
 
   return (
     <div className="overflow-x-auto mb-6">
-      <ModalCreateNews/>
+      <ModalCreateNews addArtInNewsList={addArtInNewsList}/>
 
       <Table className="min-w-96" hoverable>
         <TableHead className="text-white">
@@ -47,9 +59,9 @@ export function NewsTab() {
         </TableHead>
 
         <TableBody className="divide-y">
-          {visibleNewsList?.map((art) => {
+          {visibleNewsList?.map((art,index) => {
             return (
-              <TableRow key={art.id} className="bg-white dark:border-gray-700 dark:bg-gray-800">
+              <TableRow key={index} className="bg-white dark:border-gray-700 dark:bg-gray-800">
 
                 <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
                   {art.title}
@@ -78,8 +90,7 @@ export function NewsTab() {
       <div className='flex justify-between mt-4'>
 
         <button
-          className='bg-custom-818181 rounded-md
-        text-white p-1'
+          className='bg-custom-818181 rounded-md text-white p-1'
           type='button'
           onClick={handlePrevious}
           disabled={startIndex === 0}>

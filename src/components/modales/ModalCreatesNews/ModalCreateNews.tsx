@@ -1,12 +1,13 @@
+import { format } from "date-fns";
 import { useState } from "react";
 import { useFormik } from "formik";
 import * as yup from 'yup';
 import { createNews } from "../../../services/api/createNews";
 import { SuccessModal } from "../SuccessModal/SuccessModal";
 
-export function ModalCreateNews() {
-  const[doneRequest,setDoneRequest]=useState(false);
-  
+export function ModalCreateNews(props:any) {
+  const {addArtInNewsList}=props;
+
   //define state form
   const [form, setForm] = useState({});
   
@@ -22,37 +23,40 @@ export function ModalCreateNews() {
       img:"",
       title: "",
       description: "",
+      createdAt:"",
     },
     // validation form with validationSchema of yup
     validationSchema:validationSchema,
 
     //submit if form is validate by validationSchema of yup
-    onSubmit: values => {
-      console.log(values);
-      setForm(values);
-      setDoneRequest(true);
-      resetForm();
-    },
-  });
+    onSubmit: async values => {
+      console.log("les données sont validées, les voici:",values);
+      
+      //add current date in values
+      const currentDate=format(new Date(), "dd/MM/yyyy");
+      values={
+        ...values,
+        createdAt:currentDate,
+      }
 
-  if(doneRequest){console.log(doneRequest);
-    async function createNewsRequest (){
-      const response= await createNews(form);
+      setForm(values);
+      const response=await createNews(values);
       console.log(response);
       
       //if response ok
       //show modal to confirm success
-      const modal=document.getElementById("top-center-modal");
+      const modal=document.getElementById("popup-modal");
       if(modal){
         modal.style.display="block";
         modal.addEventListener("click",()=>{
           modal.style.display='none';
         })
       }
+      addArtInNewsList(values);
       //else show modal to indicate failure
-    }
-    createNewsRequest();
-  }
+      resetForm();
+    },
+  });
 
   return (
     <>
@@ -75,7 +79,7 @@ export function ModalCreateNews() {
             <form className="p-4 md:p-5" onSubmit={handleSubmit}>
               <div className="grid gap-4 mb-4 grid-cols-2">
                 <div className="col-span-2">
-                  <input className="border-black" type="file" name="img" id="img" accept="image/*" onChange={handleChange} value={values.img} />
+                  <input className="border border-gray-300" type="file" name="img" id="img" accept="image/*" onChange={handleChange} value={values.img} />
                   {errors.img && <small className="error">{errors.img}</small>}
                 </div>
                 <div className="col-span-2 sm:col-span-1">

@@ -12,6 +12,7 @@ import HomePage from './pages/Home/Home';
 import { FooterDown } from './components/FooterDown/FooterDown';
 import { NewsPage } from './pages/News/NewsPage';
 import { NewDetailsPage } from './pages/News/NewDetailsPage';
+import { NewsTab } from './components/tabs/NewsTab/NewsTab';
 
 interface dataUser{
   id:string,
@@ -61,6 +62,7 @@ function App() {
           <Route path='/évènements' element={<EventsPage />} />
           <Route path='*' element={<NotFoundPage />} />
         </Routes>
+        <NewsTab/>
       </main>
       
       <footer >
