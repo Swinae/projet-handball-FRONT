@@ -5,51 +5,51 @@ import * as yup from 'yup';
 import { createNews } from "../../../services/api/createNews";
 import { SuccessModal } from "../SuccessModal/SuccessModal";
 
-export function ModalCreateNews(props:any) {
-  const {addArtInNewsList}=props;
+export function ModalCreateNews(props: any) {
+  const { addArtInNewsList } = props;
 
   //define state form
   const [form, setForm] = useState({});
-  
+
   //secure form with yup
   let validationSchema = yup.object({
     img: yup.mixed().required("Veuillez choisir une image"),
-    title: yup.string().max(30,"Veuillez inscrire 30 caractères maximum !").required("Le titre est requis !"),
-    description: yup.string().min(20,"Veuillez inscrire au minimum 20 caractères !").required("La description est requise !"),
+    title: yup.string().max(30, "Veuillez inscrire 30 caractères maximum !").required("Le titre est requis !"),
+    description: yup.string().min(20, "Veuillez inscrire au minimum 20 caractères !").required("La description est requise !"),
   })
 
-  const {handleChange,handleSubmit,values,errors,resetForm} = useFormik({
+  const { handleChange, handleSubmit, values, errors, resetForm } = useFormik({
     initialValues: {
-      img:"",
+      img: "",
       title: "",
       description: "",
-      createdAt:"",
+      createdAt: "",
     },
     // validation form with validationSchema of yup
-    validationSchema:validationSchema,
+    validationSchema: validationSchema,
 
     //submit if form is validate by validationSchema of yup
     onSubmit: async values => {
-      console.log("les données sont validées, les voici:",values);
-      
+      console.log("les données sont validées, les voici:", values);
+
       //add current date in values
-      const currentDate=format(new Date(), "dd/MM/yyyy");
-      values={
+      const currentDate = format(new Date(), "dd/MM/yyyy");
+      values = {
         ...values,
-        createdAt:currentDate,
+        createdAt: currentDate,
       }
 
       setForm(values);
-      const response=await createNews(values);
+      const response = await createNews(values);
       console.log(response);
-      
+
       //if response ok
       //show modal to confirm success
-      const modal=document.getElementById("popup-modal");
-      if(modal){
-        modal.style.display="block";
-        modal.addEventListener("click",()=>{
-          modal.style.display='none';
+      const successModal = document.getElementById("popup-modal");
+      if (successModal) {
+        successModal.style.display = "block";
+        successModal.addEventListener("click", () => {
+          successModal.style.display = 'none';
         })
       }
       addArtInNewsList(values);
@@ -58,23 +58,33 @@ export function ModalCreateNews(props:any) {
     },
   });
 
+  const [formShow, setFormShow] = useState("hidden");
+
+  const handleFormShow = () => {
+    setFormShow("flex");
+  }
+
+  const handleFormHidden = () => {
+    setFormShow("hidden");
+  }
+
   return (
-    <>
-      <button data-modal-target="crud-modal" data-modal-toggle="crud-modal" className="bg-custom-FF7D00 text-white rounded-lg p-2 mb-6" type="button">
+    <div>
+      <button data-modal-target="crud-modal" data-modal-toggle="crud-modal" className="bg-custom-FF7D00 hover:bg-custom-818181 text-white rounded-lg p-2 mb-6" type="button" onClick={handleFormShow}>
         Créer une nouvelle actualité
       </button>
-      <SuccessModal/>
-      <div id="crud-modal" tab-index="-1" aria-hidden="true" className="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+      <SuccessModal />
+      <div id="crud-modal" tab-index="-1" aria-hidden="true" className={formShow + " overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"}>
         <div className="relative p-4 w-full max-w-md max-h-full">
           <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
 
             <div className="flex items-center justify-between p-4 md:p-5">
-                <button type="button" className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="crud-modal">
-                    <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                    </svg>
-                    <span className="sr-only">Close modal</span>
-                </button>
+              <button type="button" className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="crud-modal" onClick={handleFormHidden}>
+                <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                  <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                </svg>
+                <span className="sr-only">Close modal</span>
+              </button>
             </div>
             <form className="p-4 md:p-5" onSubmit={handleSubmit}>
               <div className="grid gap-4 mb-4 grid-cols-2">
@@ -95,7 +105,7 @@ export function ModalCreateNews(props:any) {
               </div>
 
               <div className="flex justify-end">
-                <button type="button" className="bg-red-800 text-white rounded-md p-2 mr-4" data-modal-toggle="crud-modal" onClick={()=>{resetForm()}}>
+                <button type="button" className="bg-red-800 text-white rounded-md p-2 mr-4" data-modal-toggle="crud-modal" onClick={() => { resetForm(), handleFormHidden() }}>
                   Annuler
                 </button>
 
@@ -108,6 +118,6 @@ export function ModalCreateNews(props:any) {
           </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }

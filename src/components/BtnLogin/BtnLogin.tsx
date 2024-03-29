@@ -1,5 +1,9 @@
-export function BtnLogin({statut="Se connecter"}){
+interface BtnProps{
+  statut:string;
+}
 
+export function BtnLogin(props:BtnProps){
+  const {statut}=props;
   return(
       <button
         data-modal-target="authentication-modal" 
