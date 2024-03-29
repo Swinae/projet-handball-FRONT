@@ -22,14 +22,14 @@ export default function CreateEventModal({ updateEventsList } : CreateEventModal
     })
 
     let newEventSchema = yup.object({
-        img: yup.mixed().required(),
-        title: yup.string().required(),
-        date: yup.string().required(),
-        location: yup.string().required(),
-        start_time: yup.string().required(),
-        end_time: yup.string().required(),
-        category: yup.string().required(),
-        description: yup.string().required(),
+        img: yup.mixed(),
+        title: yup.string(),
+        date: yup.string(),
+        location: yup.string(),
+        start_time: yup.string(),
+        end_time: yup.string(),
+        category: yup.string(),
+        description: yup.string(),
     });
 
     const { handleSubmit, handleChange, values, errors } = useFormik({

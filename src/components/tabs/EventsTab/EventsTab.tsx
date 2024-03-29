@@ -3,6 +3,7 @@ import CreateEventModal from "../../modales/CreateEventModal/CreateEventModal";
 import { getEvents } from "../../../services/api/Events";
 import { useEffect, useState } from "react";
 import IEventInterface from "../../../services/interfaces/EventInterface";
+import CategoryTag from "../../CategoryTag/CategoryTag";
 
 export default function EventsTab() {
 
@@ -53,9 +54,7 @@ export default function EventsTab() {
                                     {event?.title}
                                 </th>
                                 <td className="px-6 py-4">
-                                    <div className="category bg-red-600 top-4 left-4 py-1 px-4 rounded-full text-white w-fit">
-                                        {event?.category}
-                                    </div>
+                                    <CategoryTag eventCategory={ event }/>
                                 </td>
                                 <td className="px-6 py-4">
                                     {event?.date}
@@ -71,10 +70,6 @@ export default function EventsTab() {
                 </table>
             </div>
         </>
-
-
-
-
     );
 }
 
