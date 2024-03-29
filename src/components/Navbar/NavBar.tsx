@@ -2,10 +2,13 @@ import { NavLink } from 'react-router-dom';
 import './NavBar.css';
 
 type PropsNavbar = {
-  userRole?: string;
+  userRole: string;
 }
 
-export function NavBar({ userRole = "visiteur" }: PropsNavbar) {
+export function NavBar(props:PropsNavbar) {
+  const{userRole}=props;
+  console.log(userRole);
+  
   return (
     <>
       <nav className='bg-custom-287581 text-white nav-features'>

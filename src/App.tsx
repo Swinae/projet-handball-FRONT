@@ -12,7 +12,7 @@ import HomePage from './pages/Home/Home';
 import { FooterDown } from './components/FooterDown/FooterDown';
 import { NewsPage } from './pages/News/NewsPage';
 import { NewDetailsPage } from './pages/News/NewDetailsPage';
-import { NewsTab } from './components/tabs/NewsTab/NewsTab';
+import { DashboardPage } from './pages/Dashboard/DashboardPage';
 
 interface dataUser{
   id:string,
@@ -26,20 +26,24 @@ interface dataUser{
 }
 
 function App() {
-  const [userRole, setUserRole] = useState<string>("");
-  
+  const [userRole, setUserRole] = useState<string>("visiteur");
+  console.log(userRole);
   //function to redifine userRole
   function redifineUserRole(role:string){
+    console.log("role:",role);
+    
     //redefine role in state userRole
     setUserRole(role)
+    console.log("userRole:",userRole);
   }
 
   //userData
   const [userData, setUserData] = useState<dataUser>();
 
   //function to redefine userData
-  function handleUserData(data:dataUser):void{
+  function handleUserData(data:dataUser):void{console.log("data:",data);
     setUserData(data);
+    console.log("userData:",userData);
   }
 
   return (
@@ -60,11 +64,10 @@ function App() {
           <Route path='/actualités' element={<NewsPage/>} />
           <Route path='/actualités/detail/:idNew' element={<NewDetailsPage/>} />
           <Route path='/évènements' element={<EventsPage />} />
+          <Route path='/dashboard' element={<DashboardPage />} />     
           <Route path='*' element={<NotFoundPage />} />
         </Routes>
-        <NewsTab/>
       </main>
-      
       <footer >
         <FooterDown/>
       </footer>
