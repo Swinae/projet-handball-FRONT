@@ -28,22 +28,19 @@ interface dataUser{
 function App() {
   const [userRole, setUserRole] = useState<string>("visiteur");
   console.log(userRole);
+  
   //function to redifine userRole
   function redifineUserRole(role:string){
-    console.log("role:",role);
-    
     //redefine role in state userRole
     setUserRole(role)
-    console.log("userRole:",userRole);
   }
 
   //userData
   const [userData, setUserData] = useState<dataUser>();
 
   //function to redefine userData
-  function handleUserData(data:dataUser):void{console.log("data:",data);
+  function handleUserData(data:dataUser):void{
     setUserData(data);
-    console.log("userData:",userData);
   }
 
   return (
@@ -61,11 +58,11 @@ function App() {
       <main>
         <Routes>
           <Route path='/' element={<HomePage />} />
-          <Route path='/actualités' element={<NewsPage/>} />
-          <Route path='/actualités/detail/:idNew' element={<NewDetailsPage/>} />
-          <Route path='/évènements' element={<EventsPage />} />
-          <Route path='/dashboard' element={<DashboardPage />} />     
-          <Route path='*' element={<NotFoundPage />} />
+            <Route path='/actualités' element={<NewsPage/>} />
+            <Route path='/actualités/detail/:idNew' element={<NewDetailsPage/>} />
+            <Route path='/évènements' element={<EventsPage />} />
+            <Route path='/dashboard' element={<DashboardPage />} />     
+            <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </main>
       <footer >

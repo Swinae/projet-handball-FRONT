@@ -37,7 +37,6 @@ export function LoginModal(props: LoginModalProps) {
   })
 
   const [isAuthentificated, setIsAuthenticated] = useState<boolean>(false);
-  console.log("isAuthenticated", isAuthentificated)
   //function to redifine isAuthentificated
   function redifineIsAuthentificated(boolean:boolean){
     setIsAuthenticated(boolean)
