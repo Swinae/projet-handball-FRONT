@@ -1,17 +1,15 @@
 import { Table, TableBody, TableCell, TableHead, TableHeadCell, TableRow } from "flowbite-react";
-import { getNewsList } from "../../../services/api/getNewsList";
 import { useEffect, useState } from "react";
 import { NewData } from "../../../services/interfaces/NewData";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { ModalCreateNews } from "../../modales/ModalCreatesNews/ModalCreateNews";
+import { getNewsList } from "../../../services/api/getNewsList";
+import { ModalModifyNews } from "../../modales/ModalModifyNews/ModalModifyNews";
 
 export function NewsTab() {
   const [newsList, setNewsList] = useState<NewData[]>([]);
-  
-  const [startIndex, setStartIndex] = useState<number>(0);
-  
-  const newsNbrPerPage:number = 4;
+  console.log("newsList", newsList);
 
   useEffect(() => {
     const getNewsListRequest = async () => {
@@ -27,29 +25,52 @@ export function NewsTab() {
     getNewsListRequest();
   }, [])
 
+
+  const [startIndex, setStartIndex] = useState<number>(0);
+
+  const newsNbrPerPage: number = 4;
+
+  //inverse newsList
+  const reversedNewsList = [...newsList].reverse();
+
   //extract element quantity to show them in TableBody
-  const visibleNewsList: NewData[] | undefined = newsList?.slice(startIndex, startIndex + newsNbrPerPage);
-  
-  const addArtInNewsList=(newArt:any)=>{
+  const visibleNewsList: NewData[] | undefined = reversedNewsList?.slice(startIndex, startIndex + newsNbrPerPage);
+
+  //function to add News
+  const addArtInNewsList = (newArt: any) => {
     setNewsList([
-      newArt,...newsList
+      ...newsList, {
+        id: `${newsList.length + 1}`,
+        ...newArt
+      }
     ]);
   }
 
+  //function to edit News
+  const addArtModified = (artModified: NewData) => {
+    const index=newsList.findIndex((news) => news.id === artModified.id);
+    if(index!==-1){
+      setNewsList([
+        ...newsList.slice(0,index), artModified, ...newsList.slice(index + 1)
+      ])
+    }
+  }
+
+  //function to handle page next of table
   const handleNext = () => {
     setStartIndex(startIndex + newsNbrPerPage);
   }
 
-  const handlePrevious=()=>{
+  //function to handle page previous of table
+  const handlePrevious = () => {
     setStartIndex(Math.max(0, startIndex - newsNbrPerPage));
-    console.log(Math.max(0, startIndex - newsNbrPerPage))
-    if(Math.max(0, startIndex - newsNbrPerPage)===0){
+    if (Math.max(0, startIndex - newsNbrPerPage) === 0) {
     }
   }
 
   return (
     <div className="overflow-x-auto mb-6">
-      <ModalCreateNews addArtInNewsList={addArtInNewsList}/>
+      <ModalCreateNews addArtInNewsList={addArtInNewsList} />
 
       <Table className="min-w-96" hoverable>
         <TableHead className="text-white">
@@ -59,21 +80,28 @@ export function NewsTab() {
         </TableHead>
 
         <TableBody className="divide-y">
-          {visibleNewsList?.map((art,index) => {
+          {visibleNewsList?.map((art) => {
             return (
-              <TableRow key={index} className="bg-white dark:border-gray-700 dark:bg-gray-800">
+              //stockage news ID in attribut id of TableRow
+              <TableRow key={art.id} id={art.id} className="bg-white dark:border-gray-700 dark:bg-gray-800">
 
                 <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
                   {art.title}
                 </TableCell>
-                
+
+                <TableCell className="hidden whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                  {art.description}
+                </TableCell>
+
+                <TableCell className="hidden whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                  {art.img}
+                </TableCell>
+
                 <TableCell className="text-black text-center">{art.createdAt}</TableCell>
-                
+
                 <TableCell>
-                  <div className="flex justify-between gap-">
-                    <button className='bg-custom-15616D text-white p-1 rounded-md mr-1' type='button'>
-                      Modifier
-                    </button>
+                  <div className="flex justify-between">
+                    <ModalModifyNews addArtModified={addArtModified} />
 
                     <button className='bg-red-800 text-white p-1 rounded-md ml-1' type='button'>
                       Supprimer
@@ -94,7 +122,7 @@ export function NewsTab() {
           type='button'
           onClick={handlePrevious}
           disabled={startIndex === 0}>
-          <FontAwesomeIcon icon={faArrowLeft} className="mr-2"/>
+          <FontAwesomeIcon icon={faArrowLeft} className="mr-2" />
           Précédent
         </button>
 

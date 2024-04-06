@@ -7,11 +7,11 @@ type PropsNavbar = {
 
 export function NavBar(props:PropsNavbar) {
   const{userRole}=props;
-  console.log(userRole);
   
   return (
     <>
       <nav className='bg-custom-287581 text-white nav-features'>
+        <NavLink to="/" className={({ isActive }) => (isActive ? "active" : undefined)}>Accueil</NavLink>  
         <NavLink to="/actualités" className={({ isActive }) => (isActive ? "active" : undefined)}>Actualités</NavLink>
         <NavLink to="/évènements" className={({ isActive }) => (isActive ? "active" : undefined)}>Evènements</NavLink>
         <NavLink to="/résultats-des-matchs" className={({ isActive }) => (isActive ? "active" : undefined)}>Résultats des matchs</NavLink>
