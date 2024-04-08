@@ -10,7 +10,7 @@ export function NavBar(props:PropsNavbar) {
   
   return (
     <>
-      <nav className='bg-custom-287581 text-white nav-features'>
+      <nav className='bg-custom-287581 text-white nav-features grid grid-cols-1 md:flex'>
         <NavLink to="/" className={({ isActive }) => (isActive ? "active" : undefined)}>Accueil</NavLink>  
         <NavLink to="/actualités" className={({ isActive }) => (isActive ? "active" : undefined)}>Actualités</NavLink>
         <NavLink to="/évènements" className={({ isActive }) => (isActive ? "active" : undefined)}>Evènements</NavLink>
