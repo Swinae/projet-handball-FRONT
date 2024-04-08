@@ -32,7 +32,7 @@ export function NewDetailsPage(){
 
   return (
     <div className="flex justify-center items-center h-full">
-      <div className="flex flex-col my-10">
+      <div className="flex flex-col my-10 w-full">
         <h2 className="text-left text-2xl mb-4 font-bold">
           {newDetail?.title}
         </h2>
