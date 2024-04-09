@@ -6,6 +6,7 @@ import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { ModalCreateNews } from "../../modales/ModalCreatesNews/ModalCreateNews";
 import { getNewsList } from "../../../services/api/getNewsList";
 import { ModalModifyNews } from "../../modales/ModalModifyNews/ModalModifyNews";
+import { DeleteNewsModal } from "../../modales/DeleteNewsModal/DeleteNewsModal";
 
 export function NewsTab() {
   const [newsList, setNewsList] = useState<NewData[]>([]);
@@ -48,11 +49,24 @@ export function NewsTab() {
 
   //function to edit News
   const addArtModified = (artModified: NewData) => {
-    const index=newsList.findIndex((news) => news.id === artModified.id);
-    if(index!==-1){
+    const index = newsList.findIndex((news) => news.id === artModified.id);
+    if (index === 0) {//insert to index 0
       setNewsList([
-        ...newsList.slice(0,index), artModified, ...newsList.slice(index + 1)
+        artModified, ...newsList.slice(index + 1)
       ])
+    }
+    else if (index === newsList.length - 1) {//insert to index last
+      setNewsList([
+        ...newsList.slice(0, index), artModified
+      ])
+    }
+    else if (index !== -1) {//insert between start and end
+      setNewsList([
+        ...newsList.slice(0, index), artModified, ...newsList.slice(index + 1)
+      ])
+    }
+    else{
+      console.log("Index de l'article pas trouvé dans newsList");
     }
   }
 
@@ -103,9 +117,7 @@ export function NewsTab() {
                   <div className="flex justify-between">
                     <ModalModifyNews addArtModified={addArtModified} />
 
-                    <button className='bg-red-800 text-white p-1 rounded-md ml-1' type='button'>
-                      Supprimer
-                    </button>
+                    <DeleteNewsModal/>
                   </div>
                 </TableCell>
 
