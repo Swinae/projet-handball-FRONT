@@ -1,4 +1,5 @@
 export default interface IEventInterface {
+    id: number,
     img: string,
     title: string,
     description: string,

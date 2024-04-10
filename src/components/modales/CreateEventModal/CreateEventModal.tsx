@@ -11,6 +11,7 @@ interface CreateEventModalProps {
 export default function CreateEventModal({ updateEventsList } : CreateEventModalProps) {
 
     const [newEvent, setNewEvent] = useState<IEventInterface>({
+        id: 0,
         img: '',
         title: '',
         date: '',
