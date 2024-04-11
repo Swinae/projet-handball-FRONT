@@ -26,7 +26,8 @@ interface dataUser{
 }
 
 function App() {
-  const [userRole, setUserRole] = useState<string>("");
+  const [userRole, setUserRole] = useState<string>("visiteur");
+  console.log(userRole);
   
   //function to redifine userRole
   function redifineUserRole(role:string){
@@ -45,9 +46,9 @@ function App() {
   return (
     <>
       <header className='bg-custom-15616D'>
-        <div className='flex justify-between items-center'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 justify-center'>
           <ClubIdentity />
-          <div className='flex gap-4'>
+          <div className='flex flex-col gap-4 items-end sm:flex-row sm:items-center sm:justify-end'>
             { (userRole === "admin" || userRole === "joueur" || userRole === "supporter")?<Person avatar={userData?.avatar} firstname={userData?.firstname} lastname={userData?.lastname} role={userData?.role} />:<SignupModal/>}
             <LoginModal handleUserData={handleUserData} redifineUserRole={redifineUserRole} />
           </div>
@@ -64,11 +65,9 @@ function App() {
           <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </main>
-    
-    <footer>
+      <footer >
         <FooterDown/>
       </footer>
-
     </>
   )
 }

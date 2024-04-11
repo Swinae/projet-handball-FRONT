@@ -2,13 +2,16 @@ import { NavLink } from 'react-router-dom';
 import './NavBar.css';
 
 type PropsNavbar = {
-  userRole?: string;
+  userRole: string;
 }
 
-export function NavBar({ userRole = "visiteur" }: PropsNavbar) {
+export function NavBar(props:PropsNavbar) {
+  const{userRole}=props;
+  
   return (
     <>
-      <nav className='bg-custom-287581 text-white nav-features'>
+      <nav className='bg-custom-287581 text-white nav-features grid grid-cols-1 md:flex'>
+        <NavLink to="/" className={({ isActive }) => (isActive ? "active" : undefined)}>Accueil</NavLink>  
         <NavLink to="/actualités" className={({ isActive }) => (isActive ? "active" : undefined)}>Actualités</NavLink>
         <NavLink to="/évènements" className={({ isActive }) => (isActive ? "active" : undefined)}>Evènements</NavLink>
         <NavLink to="/résultats-des-matchs" className={({ isActive }) => (isActive ? "active" : undefined)}>Résultats des matchs</NavLink>

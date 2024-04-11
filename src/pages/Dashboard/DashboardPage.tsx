@@ -1,14 +1,13 @@
 import { Tabs } from "flowbite-react";
 import EventsTab from "../../components/tabs/EventsTab/EventsTab";
+import { NewsTab } from "../../components/tabs/NewsTab/NewsTab";
 
 export default function DashboardPage() {
     return (
         <>
             <Tabs aria-label="Tabs" style="underline">
                 <Tabs.Item active title="Gérer les actualités">
-                    This is <span className="font-medium text-gray-800 dark:text-white">Profile tab's associated content</span>.
-                    Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to
-                    control the content visibility and styling.
+                     <NewsTab/>
                 </Tabs.Item>
                 <Tabs.Item title="Gérer les évènements">
                     {<EventsTab />}

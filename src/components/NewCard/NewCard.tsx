@@ -22,21 +22,21 @@ export function NewCard(props: NewCardProps) {
   }
 
   return (
-    <div className='grid grid-cols-3 gap-8 my-8'>
+    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-8 gap-y-8 gap-x-8'>
       {NewsList && NewsList.map((itemNew) => (
         <Card
           key={itemNew.id}
-          className="min-w-96 max-w-96 mx-auto"
+          className='w-full'
           imgAlt={`image reflétant le titre: ${itemNew.title} de l'actualité`} 
           imgSrc={itemNew.img}
         >
-          <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+          <h5>
             {itemNew.title}
           </h5>
-          <p className="font-normal text-gray-700 dark:text-gray-400 overflow-hidden line-clamp-3">
+          <p>
             {itemNew.description}
           </p>
-          <button className='w-1/4 text-center bg-custom-287581 text-white rounded-md px-auto' type='button' onClick={()=>{handleRedirection(itemNew.id)}}>Détails<FontAwesomeIcon className='ml-2' icon={faArrowRight}/></button>
+          <button className='flex w-28 justify-center items-center bg-custom-287581 text-white rounded-md' type='button' onClick={()=>{handleRedirection(itemNew.id)}}>Détails<FontAwesomeIcon className='ml-2' icon={faArrowRight}/></button>
         </Card>
       ))}
     </div>
