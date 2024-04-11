@@ -1,7 +1,7 @@
 import { format } from "date-fns";
 import { useFormik } from "formik";
 import * as yup from 'yup';
-import {useEffect, useState, MouseEventHandler } from "react";
+import {/* useEffect, */ useState, MouseEventHandler } from "react";
 import { SuccessModal } from "../SuccessModal/SuccessModal";
 import { NewData } from "../../../services/interfaces/NewData";
 import { modifyNews } from "../../../services/api/modifyNews";
@@ -124,13 +124,13 @@ export function ModalModifyNews({ addArtModified }: ModalModifyNewsProps) {
     }
   })
 
-  useEffect(() => {
+/*   useEffect(() => {
     values.id = selectedNews.id,
       values.img = selectedNews.img,
       values.title = selectedNews.title,
       values.description = selectedNews.description,
       values.createdAt = selectedNews.createdAt
-  }, [selectedNews])
+  }, [selectedNews]) */
 
   return (
     <>
