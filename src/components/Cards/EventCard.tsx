@@ -1,3 +1,4 @@
+import CategoryTag from "../CategoryTag/CategoryTag";
 
 export default function EventCard(props: any) {
 
@@ -8,8 +9,8 @@ export default function EventCard(props: any) {
     return (
         <>
             <div className="relative max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                <div className="category absolute z-10 bg-red-600 top-4 left-4 py-1 px-4 rounded-full text-white">
-                    Match
+                <div className="absolute z-10 top-4 left-4">
+                    <CategoryTag eventCategory={ eventInfo } />
                 </div>
                 <a href="#">
                     <img className="rounded-t-lg" src={eventInfo.img} alt="" />
