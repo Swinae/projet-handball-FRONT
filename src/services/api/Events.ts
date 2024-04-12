@@ -19,9 +19,11 @@ export async function postEvents(event: IEventInterface): Promise<any> {
 }
 
 export async function putEvents(modifiedEvent) {
-    
+    //A TERMINER
 }
 
-export async function deleteEvent(id) {
-    
+export async function deleteEvent(eventId: number) {
+    const deletedEventIndex =  eventFaker.findIndex(({id}) => id === eventId)
+    eventFaker.splice(deletedEventIndex, 1) 
+    console.log(eventFaker);
 }
