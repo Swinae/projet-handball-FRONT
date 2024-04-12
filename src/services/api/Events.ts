@@ -17,3 +17,11 @@ export async function postEvents(event: IEventInterface): Promise<any> {
     //const postEvent = await api.post(``, event);
     //return postEvent;
 }
+
+export async function putEvents(modifiedEvent) {
+    
+}
+
+export async function deleteEvent(id) {
+    
+}
