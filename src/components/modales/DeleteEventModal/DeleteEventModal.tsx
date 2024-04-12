@@ -3,13 +3,19 @@ import { useState } from "react";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { deleteEvent } from "../../../services/api/Events";
 
-export default function DeleteEventModal(props: any) {
+interface DeleteEventModalProps {
+    updateEventsList(): void;
+    eventId: number
+}
+
+export default function DeleteEventModal(props: DeleteEventModalProps) {
     const [openModal, setOpenModal] = useState(false);
-    const {eventId} = props
+    const {eventId, updateEventsList} = props
 
     const deleteEventClick = async (id: number):Promise<void> => {
         await deleteEvent(id)
         setOpenModal(false)
+        updateEventsList()
     }
 
     return (

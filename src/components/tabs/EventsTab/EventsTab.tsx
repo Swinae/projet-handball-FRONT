@@ -79,7 +79,7 @@ export default function EventsTab() {
                                 </td>
                                 <td className="px-6 py-4 text-right flex gap-2 justify-end">
                                     <Button onClick={() => handleModifyEvent(event)} data-modal-target="modify-event-modal" data-modal-toggle="modify-event-modal">Modifier</Button>
-                                    <DeleteEventModal eventId={event.id}/>
+                                    <DeleteEventModal eventId={event.id} updateEventsList={updateEventsList}/>
                                 </td>
                             </tr>
                         ))
