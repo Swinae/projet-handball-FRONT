@@ -37,18 +37,6 @@ export default function CreateEventModal({ updateEventsList } : CreateEventModal
         initialValues: newEvent,
         validationSchema: newEventSchema,
         onSubmit: async values => {
-         /*    setNewEvent({
-                img: values.img,
-                title: values.title,
-                date: values.date,
-                location: values.location,
-                start_time: values.start_time,
-                end_time: values.end_time,
-                category: values.category,
-                description: values.description
-            }); */
-            //Inutile ????
-            
             await postEvents(values);
             updateEventsList();
         }
