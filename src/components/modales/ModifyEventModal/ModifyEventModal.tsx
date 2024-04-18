@@ -36,8 +36,6 @@ export default function ModifyEventModal({ event, updateEventsList } : ModifyEve
 
     })
 
-
-
     useEffect(() => {
         setModifiedEvent(event)
     

@@ -7,12 +7,13 @@ import { ClubIdentity } from './components/ClubIdentity/ClubIdentity';
 import { NotFoundPage } from './services/utils/NotFoundPage';
 import { Person } from './components/Person/Person';
 import SignupModal from './components/modales/SignupModal/SignupModal';
-import EventsPage from './pages/Events/Events';
+import EventsPage from './pages/Events/EventsPage';
 import HomePage from './pages/Home/Home';
 import { FooterDown } from './components/FooterDown/FooterDown';
 import { NewsPage } from './pages/News/NewsPage';
 import { NewDetailsPage } from './pages/News/NewDetailsPage';
 import DashboardPage from './pages/Dashboard/DashboardPage';
+import EventDetailsPage from './pages/Events/EventDetailsPage';
 
 interface dataUser{
   id:string,
@@ -61,6 +62,7 @@ function App() {
           <Route path='/actualités' element={<NewsPage/>} />
           <Route path='/actualités/detail/:idNew' element={<NewDetailsPage/>} />
           <Route path='/évènements' element={<EventsPage />} />
+          <Route path='/évènements/detail/:idEvent' element={<EventDetailsPage/>} />
           <Route path='/dashboard' element={<DashboardPage />} />
           <Route path='*' element={<NotFoundPage />} />
         </Routes>

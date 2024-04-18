@@ -21,7 +21,7 @@ export default function EventsPage() {
 
     return (
         <>
-            <div className="mt-4 grid grid-cols-3 gap-8">
+            <div className="my-4 grid grid-cols-3 gap-8">
                 {events.map((event: IEventInterface, index: number) =>
                     (
                         <EventCard key={index} eventInfo={event} />
