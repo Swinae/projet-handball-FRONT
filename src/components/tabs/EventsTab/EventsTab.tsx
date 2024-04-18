@@ -23,6 +23,7 @@ export default function EventsTab() {
     });
 
     useEffect(() => {
+
         async function loadEvents() {
             const eventList = await getEvents()
             setEvents(eventList)
@@ -39,7 +40,9 @@ export default function EventsTab() {
 
     const handleModifyEvent = (event: IEventInterface) => {
         setSelectedEvent(event);
+        console.log("🚀 ~ handleModifyEvent ~ event:", event)
     };
+
 
     return (
         <>
