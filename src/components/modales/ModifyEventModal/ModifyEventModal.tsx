@@ -1,7 +1,7 @@
 import * as yup from 'yup';
 import { useFormik } from "formik"
 import { useEffect, useState } from "react";
-import { postEvents } from '../../../services/api/Events';
+import { putEvents } from '../../../services/api/Events';
 import IEventInterface from '../../../services/interfaces/EventInterface';
 
 interface ModifyEventModalProps {
@@ -11,8 +11,6 @@ interface ModifyEventModalProps {
 
 export default function ModifyEventModal({ event, updateEventsList } : ModifyEventModalProps) {
 
-    console.log(event);
-    
     const [modifiedEvent, setModifiedEvent] = useState<IEventInterface>(event)
 
     let modifiedEventSchema = yup.object({
@@ -28,19 +26,22 @@ export default function ModifyEventModal({ event, updateEventsList } : ModifyEve
 
     const { handleSubmit, handleChange, values, errors } = useFormik({
         initialValues: modifiedEvent,
+        // enableReinitialize: true permet de mettre à jour les initialValues quand event obtenue en props change. setModifiedEvent(event) -> change modifiedEvent -> change les initials values
+        enableReinitialize: true,
         validationSchema: modifiedEventSchema,
-        onSubmit: async values => { 
-            await postEvents(values);
+        onSubmit: async values => {
+            await putEvents(values);
             updateEventsList();
         }
+
     })
+
+
 
     useEffect(() => {
         setModifiedEvent(event)
+    
     }, [event])
-
-    console.log("values.category:", values.category);
-    console.log("modifiedEvent.category:", modifiedEvent.category);
     
     return (
         <>
@@ -60,7 +61,10 @@ export default function ModifyEventModal({ event, updateEventsList } : ModifyEve
                             <form onSubmit={handleSubmit} className="space-y-4" action="#">
                                 <div>
                                     <label htmlFor="img" className="block mb-2 text-sm font-medium text-gray-900 ">Ajouter une image</label>
-                                    <input onChange={handleChange} value={values.img} type="file" name="img" id="modify-event-img" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" accept=".jpg, .png, .svg" />
+                                    
+                                    {/* !!!! Changer le type d'input en 'file' quand relier à la DB. Obligé de mettre en text pour faire fonctionner avec les fakers !!!! */}
+                                    <input onChange={handleChange} value={values.img} type="text" name="img" id="modify-event-img" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" accept=".jpg, .png, .svg" />
+                                
                                 </div>
                                 {errors.img && <div className="error">{errors.img}</div>}
                                 <div>
