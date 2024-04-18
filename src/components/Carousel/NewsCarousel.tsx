@@ -27,7 +27,9 @@ export function NewsCarousel(): JSX.Element  {
             <div className="relative h-48 md:h-[600px] max-w-[800px] overflow-x-hidden m-auto">
                 {/* <!-- Lastest piece of news : data-carousel-item="active"--> */}
                 <div className="hidden duration-700 ease-in-out max-w-[800px]" data-carousel-item="active">
-                    <img src={lastNewsItem?.img} className="block " alt="..." />
+                    
+                    {/* !!!! width de l'image harcodé pour que ça fonctionne avec le faker, A CHANGER AVEC LA DB !!! */}
+                    <img src={lastNewsItem?.img} className="block w-[800px]" alt="..." />
                     <h2 className="text-4xl">{lastNewsItem?.title}</h2>
                     <p>{lastNewsItem?.description}</p>
                 </div>
@@ -36,9 +38,11 @@ export function NewsCarousel(): JSX.Element  {
                 {lastNews.map((newsItem: NewData, index: number) =>
                 (
                     <div className="hidden duration-700 ease-in-out max-w-[800px]" data-carousel-item key={index}>
-                        <img src={newsItem.img} className="block " alt="..." />
+                        
+                        {/* !!!! width de l'image harcodé pour que ça fonctionne avec le faker, A CHANGER AVEC LA DB !!! */}
+                        <img src={newsItem.img} className="block w-[800px]" alt="..." />
                         <h2 className="text-4xl">{newsItem.title}</h2>
-                        <p>{newsItem.description}</p>
+                        <p className='line-clamp-2'>{newsItem.description}</p>
                     </div>
                 ))
                 }
