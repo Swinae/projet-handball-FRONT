@@ -18,6 +18,6 @@ h5 {
 }
 
 .active {
-  color: #FF7D00;
+  /* color: #FF7D00; */
   font-weight: bold;
 }

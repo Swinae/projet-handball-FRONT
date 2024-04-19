@@ -14,6 +14,7 @@ import { NewsPage } from './pages/News/NewsPage';
 import { NewDetailsPage } from './pages/News/NewDetailsPage';
 import DashboardPage from './pages/Dashboard/DashboardPage';
 import EventDetailsPage from './pages/Events/EventDetailsPage';
+import { PlayersPage } from './pages/Players/PlayersPage';
 
 interface dataUser{
   id:string,
@@ -70,6 +71,7 @@ function App() {
           <Route path='/actualités/detail/:idNew' element={<NewDetailsPage/>} />
           <Route path='/évènements' element={<EventsPage />} />
           <Route path='/évènements/detail/:idEvent' element={<EventDetailsPage/>} />
+          <Route path='/joueurs' element={<PlayersPage />} />
           <Route path='/dashboard' element={<DashboardPage />} />
           <Route path='*' element={<NotFoundPage />} />
 >>>>>>> 6a505d8 (Added :)
