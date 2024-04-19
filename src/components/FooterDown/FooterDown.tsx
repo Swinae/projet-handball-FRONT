@@ -12,7 +12,7 @@ export function FooterDown() {
             <FooterLink className='text-white pr-12' href="#">Mentions légales</FooterLink>
           </FooterLinkGroup>
         </div>
-        <FooterDivider className="w-[92%]"/>
+        <FooterDivider className="w-[92%] !my-2"/>
         <FooterCopyright className='text-white' href="#" by="NIGHT'S WATCH HANDBALL. Tous droits réservés." year={2023} />
       </div>
     </Footer>

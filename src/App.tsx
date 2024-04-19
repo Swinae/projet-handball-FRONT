@@ -48,7 +48,7 @@ function App() {
   return (
     <>
       <header className='bg-custom-15616D'>
-        <div className='grid grid-cols-1 sm:grid-cols-2 justify-center'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 justify-center items-center'>
           <ClubIdentity />
           <div className='flex flex-col gap-4 items-end sm:flex-row sm:items-center sm:justify-end'>
             { (userRole === "admin" || userRole === "joueur" || userRole === "supporter")?<Person avatar={userData?.avatar} firstname={userData?.firstname} lastname={userData?.lastname} role={userData?.role} />:<SignupModal/>}
