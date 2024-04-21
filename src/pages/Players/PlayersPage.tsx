@@ -14,36 +14,36 @@ export function PlayersPage() {
                     <option value="Pivots">Pivots</option>
                 </select>
 
-                <div className="player-list grid grid-cols-[auto, 1fr] grid-rows-5 mt-4 gap-4">
-                    <h4 className="col-start-1 row-start-1">GARDIENS</h4>
+                <div className="player-list grid grid-cols-[auto, 1fr] grid-rows-5 mt-4 gap-4 items-center">
+                    <h4 className="col-start-1 row-start-1 text-custom-15616D font-bold">GARDIENS</h4>
                     <div className="player-list--cards col-start-2 row-start-1 flex gap-4">
                         <PlayerCard />
                         <PlayerCard />
                         <PlayerCard />
                         <PlayerCard />
                     </div>
-                    <h4 className="col-start-1 row-start-2">AILIERS</h4>
+                    <h4 className="col-start-1 row-start-2 text-custom-15616D font-bold">AILIERS</h4>
                     <div className="player-list--cards col-start-2 row-start-2 flex gap-4">
                         <PlayerCard />
                         <PlayerCard />
                         <PlayerCard />
                         <PlayerCard />
                     </div>
-                    <h4 className="col-start-1 row-start-3">DEMI-CENTRES</h4>
+                    <h4 className="col-start-1 row-start-3 text-custom-15616D font-bold">DEMI-CENTRES</h4>
                     <div className="player-list--cards col-start-2 row-start-3 flex gap-4">
                         <PlayerCard />
                         <PlayerCard />
                         <PlayerCard />
                         <PlayerCard />
                     </div>
-                    <h4 className="col-start-1 row-start-4">ARRIERES</h4>
+                    <h4 className="col-start-1 row-start-4 text-custom-15616D font-bold">ARRIERES</h4>
                     <div className="player-list--cards col-start-2 row-start-4 flex gap-4">
                         <PlayerCard />
                         <PlayerCard />
                         <PlayerCard />
                         <PlayerCard />
                     </div>
-                    <h4 className="col-start-1 row-start-5">PIVOTS</h4>
+                    <h4 className="col-start-1 row-start-5 text-custom-15616D font-bold">PIVOTS</h4>
                     <div className="player-list--cards col-start-2 row-start-5 flex gap-4">
                         <PlayerCard />
                         <PlayerCard />
