@@ -1,7 +1,7 @@
 import { format } from "date-fns";
 import { useFormik } from "formik";
 import * as yup from 'yup';
-import {/* useEffect, */ useState, MouseEventHandler } from "react";
+import {/* useEffect, */ useState, MouseEventHandler, useEffect } from "react";
 import { SuccessModal } from "../SuccessModal/SuccessModal";
 import { NewData } from "../../../services/interfaces/NewData";
 import { modifyNews } from "../../../services/api/modifyNews";
@@ -13,9 +13,12 @@ interface EditModeProps {
 
 interface ModalModifyNewsProps {
   addArtModified: (artModified: NewData) => void;
+  id:string;
 }
 
-export function ModalModifyNews({ addArtModified }: ModalModifyNewsProps) {
+export function ModalModifyNews(props: ModalModifyNewsProps) {
+
+  const {addArtModified, id}=props;
 
   //define a editMode to actived field
   const [editMode, setEditMode] = useState<EditModeProps>({
@@ -124,13 +127,13 @@ export function ModalModifyNews({ addArtModified }: ModalModifyNewsProps) {
     }
   })
 
-/*   useEffect(() => {
+  useEffect(() => {
     values.id = selectedNews.id,
-      values.img = selectedNews.img,
-      values.title = selectedNews.title,
-      values.description = selectedNews.description,
-      values.createdAt = selectedNews.createdAt
-  }, [selectedNews]) */
+    values.img = selectedNews.img,
+    values.title = selectedNews.title,
+    values.description = selectedNews.description,
+    values.createdAt = selectedNews.createdAt
+  }, [selectedNews]) 
 
   return (
     <>
@@ -159,20 +162,20 @@ export function ModalModifyNews({ addArtModified }: ModalModifyNewsProps) {
             <form className="p-4 md:p-5" onSubmit={handleSubmit}>
               <div>
                 <div>
-                  <label htmlFor="image-update" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></label>
+                  <label htmlFor={"image-update-" + id } className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></label>
                   <img src={selectedNews.img} alt="Selected Image" className="m-auto max-w-200" />
-                  <input className="border border-gray-300 my-4" type="file" name="img" id="image-update" accept="image/*" onChange={handleChange} />
+                  <input className="border border-gray-300 my-4" type="file" name="img" id={"image-update-" + id } accept="image/*" onChange={handleChange} />
                 </div>
 
                 <div>
-                  <label htmlFor="title-update" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Titre</label>
-                  <input readOnly={editMode.title} type="text" name="title" id="title-update" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" value={values.title ? values.title : selectedNews.title} onClick={() => { handleClick("title") }} onChange={handleChange} />
+                  <label htmlFor={"title-update-" + id} className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Titre</label>
+                  <input readOnly={editMode.title} type="text" name="title" id={"title-update-" + id} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" value={values.title ? values.title : selectedNews.title} onClick={() => { handleClick("title") }} onChange={handleChange} />
                   {errors.title && values.title !== "" && <small className="error">{errors.title}</small>}
                 </div>
 
                 <div className="mb-4">
-                  <label htmlFor="description-update" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
-                  <textarea readOnly={editMode.description} id="description-update" name="description" rows={4} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value={values.description ? values.description : selectedNews.description} onClick={() => { handleClick("description") }} onChange={handleChange}></textarea>
+                  <label htmlFor={"description-update-" + id} className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
+                  <textarea readOnly={editMode.description} id={"description-update-" + id} name="description" rows={4} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value={values.description ? values.description : selectedNews.description} onClick={() => { handleClick("description") }} onChange={handleChange}></textarea>
                   {errors.description && values.description !== "" && <small className="error">{errors.description}</small>}
                 </div>
               </div>
