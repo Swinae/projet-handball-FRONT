@@ -1,14 +1,14 @@
 import IEventInterface from "../../services/interfaces/EventInterface"
 
 interface EventProps {
-    eventCategory: IEventInterface
+    eventCategory: IEventInterface | undefined
 }
 
 export default function CategoryTag(props: EventProps) {
 
     const { eventCategory } = props
     let categoryTagColor = ''
-    switch (eventCategory.category) {
+    switch (eventCategory?.category) {
         case 'Match':
             categoryTagColor = 'bg-red-600';
             break;

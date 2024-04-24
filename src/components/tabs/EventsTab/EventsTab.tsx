@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import IEventInterface from "../../../services/interfaces/EventInterface";
 import CategoryTag from "../../CategoryTag/CategoryTag";
 import ModifyEventModal from "../../modales/ModifyEventModal/ModifyEventModal";
+import DeleteEventModal from "../../modales/DeleteEventModal/DeleteEventModal";
 
 export default function EventsTab() {
 
@@ -21,8 +22,8 @@ export default function EventsTab() {
         description: ''
     });
 
-
     useEffect(() => {
+
         async function loadEvents() {
             const eventList = await getEvents()
             setEvents(eventList)
@@ -39,13 +40,15 @@ export default function EventsTab() {
 
     const handleModifyEvent = (event: IEventInterface) => {
         setSelectedEvent(event);
+        console.log("🚀 ~ handleModifyEvent ~ event:", event)
     };
+
 
     return (
         <>
             <button type="button" data-modal-target="create-event-modal" data-modal-toggle="create-event-modal" className="text-white bg-custom-FF7D00 hover:bg-[#e77000] focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">Ajouter un évènement</button>
             <CreateEventModal updateEventsList={updateEventsList} />
-            <ModifyEventModal event={selectedEvent} updateEventsList={updateEventsList}/> {/* A VOIR OU POSITIONNER CE COMPOSANT DANS LE CODE */}
+            <ModifyEventModal event={selectedEvent} updateEventsList={updateEventsList}/>
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
                 <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <thead className="text-xs text-white uppercase bg-custom-15616D dark:bg-gray-700 dark:text-gray-400">
@@ -65,7 +68,7 @@ export default function EventsTab() {
                         </tr>
                     </thead>
                     <tbody>
-                        {events.map((event: IEventInterface, index: number) =>
+                        {events.sort((a, b) => b.id - a.id).map((event: IEventInterface, index: number) =>
                         (
                             <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                 <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
@@ -79,7 +82,7 @@ export default function EventsTab() {
                                 </td>
                                 <td className="px-6 py-4 text-right flex gap-2 justify-end">
                                     <Button onClick={() => handleModifyEvent(event)} data-modal-target="modify-event-modal" data-modal-toggle="modify-event-modal">Modifier</Button>
-                                    <Button color="failure">Supprimer</Button>
+                                    <DeleteEventModal eventId={event.id} updateEventsList={updateEventsList}/>
                                 </td>
                             </tr>
                         ))
