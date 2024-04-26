@@ -3,20 +3,30 @@
 import { Button, Modal } from "flowbite-react";
 import { useState } from "react";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
+//import { deleteNews } from "../../../services/api/deleteNews";
 
-export function DeleteNewsModal() {
+export function DeleteNewsModal(props:any) {
+  const {news_id, deleteArt}= props;
+
   const [openModal, setOpenModal] = useState(false);
 
-  const handleBtnOk=async()=>{
+  const handleBtnOk = async () => {
     //request api to delete news
-
+/*     const response = await deleteNews(news_id);
+    console.log("response: ",response); */
+    
+    //if response 204
     //close modal
     setOpenModal(false);
+
+    //delete art
+    deleteArt(news_id);
   }
 
   return (
     <>
       <Button className="group flex items-center justify-center text-center font-medium relative focus:z-10 focus:outline-none transition-[color,background-color,border-color,text-decoration-color,fill,stroke,box-shadow] border border-transparent enabled:hover:bg-red-800 focus:ring-4 focus:ring-white border-none bg-red-800 text-white p-1 rounded-md ml-1" onClick={() => setOpenModal(true)}>Supprimer</Button>
+
       <Modal show={openModal} size="md" onClose={() => setOpenModal(false)} popup>
         <Modal.Header />
         <Modal.Body>

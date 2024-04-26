@@ -65,9 +65,17 @@ export function NewsTab() {
         ...newsList.slice(0, index), artModified, ...newsList.slice(index + 1)
       ])
     }
-    else{
+    else {
       console.log("Index de l'article pas trouvé dans newsList");
     }
+  }
+
+  //function to edit News
+  const deleteArt = (news_id: string) => {
+    const newsListModified = newsList.filter((art) =>art.id !== news_id);
+    
+    //reassign state newsList
+    setNewsList(newsListModified)
   }
 
   //function to handle page next of table
@@ -97,7 +105,7 @@ export function NewsTab() {
           {visibleNewsList?.map((art) => {
             return (
               //stockage news ID in attribut id of TableRow
-              <TableRow key={art.id} id={art.id} className="bg-white dark:border-gray-700 dark:bg-gray-800">
+              <TableRow key={art.id} id={art.id} className="tableRow bg-white dark:border-gray-700 dark:bg-gray-800">
 
                 <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
                   {art.title}
@@ -117,7 +125,7 @@ export function NewsTab() {
                   <div className="flex justify-between">
                     <ModalModifyNews addArtModified={addArtModified} id={art.id} />
 
-                    <DeleteNewsModal/>
+                    <DeleteNewsModal news_id={art.id} deleteArt={deleteArt} />
                   </div>
                 </TableCell>
 
