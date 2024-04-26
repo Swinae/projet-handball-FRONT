@@ -2,7 +2,7 @@ import { format } from "date-fns";
 import { useState } from "react";
 import { useFormik } from "formik";
 import * as yup from 'yup';
-import { createNews } from "../../../services/api/createNews";
+import { createNews } from "../../../services/api/News";
 import { SuccessModal } from "../SuccessModal/SuccessModal";
 
 interface ModalCreateNewsProps {

@@ -1,7 +1,7 @@
 import { NewCard } from "../../components/NewCard/NewCard";
 import { useEffect, useState } from "react";
 import { NewData } from "../../services/interfaces/NewData";
-import { getNewsList } from "../../services/api/getNewsList";
+import { getNewsList } from "../../services/api/News";
 
 export function NewsPage() {
   const [newsList, setNewsList] = useState<NewData[]>()

@@ -4,7 +4,7 @@ import * as yup from 'yup';
 import {/* useEffect, */ useState, MouseEventHandler, useEffect } from "react";
 import { SuccessModal } from "../SuccessModal/SuccessModal";
 import { NewData } from "../../../services/interfaces/NewData";
-import { modifyNews } from "../../../services/api/modifyNews";
+import { modifyNews } from "../../../services/api/News";
 
 interface EditModeProps {
   title: boolean;

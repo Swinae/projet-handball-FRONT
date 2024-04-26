@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getNewsList } from '../../services/api/getNewsList';
+import { getNewsList } from '../../services/api/News';
 import { NewData } from '../../services/interfaces/NewData';
 import './NewsCarousel.css'
 

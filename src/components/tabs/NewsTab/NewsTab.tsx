@@ -4,7 +4,7 @@ import { NewData } from "../../../services/interfaces/NewData";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { ModalCreateNews } from "../../modales/ModalCreatesNews/ModalCreateNews";
-import { getNewsList } from "../../../services/api/getNewsList";
+import { getNewsList } from "../../../services/api/News";
 import { ModalModifyNews } from "../../modales/ModalModifyNews/ModalModifyNews";
 import { DeleteNewsModal } from "../../modales/DeleteNewsModal/DeleteNewsModal";
 

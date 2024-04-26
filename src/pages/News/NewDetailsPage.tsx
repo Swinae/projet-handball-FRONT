@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom"
-import { getNewDetail } from "../../services/api/getNewDetail";
+import { getNewDetail } from "../../services/api/News";
 import { useEffect, useState } from "react";
 
 interface newDetail{

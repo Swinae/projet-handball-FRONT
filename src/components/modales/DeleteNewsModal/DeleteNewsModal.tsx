@@ -3,7 +3,7 @@
 import { Button, Modal } from "flowbite-react";
 import { useState } from "react";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
-//import { deleteNews } from "../../../services/api/deleteNews";
+//import { deleteNews } from "../../../services/api/News";
 
 export function DeleteNewsModal(props:any) {
   const {news_id, deleteArt}= props;
