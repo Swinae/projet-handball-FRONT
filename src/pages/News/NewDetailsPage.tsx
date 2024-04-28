@@ -7,7 +7,7 @@ interface newDetail{
   img:string;
   title:string;
   description:string;
-  createdAt:string;
+  created_at:string;
 }
 
 export function NewDetailsPage(){
@@ -37,7 +37,7 @@ export function NewDetailsPage(){
           {newDetail?.title}
         </h2>
         <img className="rounded" src={"/"+newDetail?.img} alt="Il s'agit d'une illustration de l'actualité"/>
-        <time className="text-right mt-2">{newDetail?.createdAt}</time>
+        <time className="text-right mt-2">{newDetail?.created_at}</time>
         <p className="mt-2">{newDetail?.description}</p>
       </div>
     </div>

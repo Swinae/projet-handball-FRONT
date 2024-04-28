@@ -16,9 +16,9 @@ export function NavBar(props:PropsNavbar) {
         <NavLink to="/évènements" className={({ isActive }) => (isActive ? "active" : undefined)}>Evènements</NavLink>
         <NavLink to="/résultats-des-matchs" className={({ isActive }) => (isActive ? "active" : undefined)}>Résultats des matchs</NavLink>
         <NavLink to="/calendrier" className={({ isActive }) => (isActive ? "active" : undefined)}>Calendrier</NavLink>
-        {(userRole === "admin" || userRole === "supporter") && <NavLink to="/joueurs" className={({ isActive }) => (isActive ? "active" : undefined)}>Profil des joueurs</NavLink>}
-        {userRole === "supporter" && <NavLink to="/profil" className={({ isActive }) => (isActive ? "active" : undefined)}>Mon Profil</NavLink>}
-        {userRole === "admin" && <NavLink to="/dashboard" className={({ isActive }) => (isActive ? "active" : undefined)}>Tableau de bord</NavLink>}
+        {(userRole === "ADMIN" || userRole === "SUPPORTER") && <NavLink to="/joueurs" className={({ isActive }) => (isActive ? "active" : undefined)}>Profil des joueurs</NavLink>}
+        {userRole === "SUPPORTER" && <NavLink to="/profil" className={({ isActive }) => (isActive ? "active" : undefined)}>Mon Profil</NavLink>}
+        {userRole === "ADMIN" && <NavLink to="/dashboard" className={({ isActive }) => (isActive ? "active" : undefined)}>Tableau de bord</NavLink>}
       </nav>
     </>
   )

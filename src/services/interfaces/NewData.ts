@@ -3,6 +3,6 @@ export interface NewData  {
   img:string,
   title:string,
   description:string,
-  createdAt:string,
+  created_at:string,
   modifiedAt?:string,
 }

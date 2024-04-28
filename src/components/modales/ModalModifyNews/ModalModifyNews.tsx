@@ -50,7 +50,7 @@ export function ModalModifyNews(props: ModalModifyNewsProps) {
     img: "",
     title: "",
     description: "",
-    createdAt: "",
+    created_at: "",
     modifiedAt: "",
   });
 
@@ -64,7 +64,7 @@ export function ModalModifyNews(props: ModalModifyNewsProps) {
         title: e.target.parentElement?.parentElement?.parentElement?.children[0]?.textContent || "",
         img: e.target.parentElement?.parentElement?.parentElement?.children[2]?.textContent || "",
         description: e.target.parentElement?.parentElement?.parentElement?.children[1]?.textContent || "",
-        createdAt: e.target.parentElement?.parentElement?.parentElement?.children[3]?.textContent || ""
+        created_at: e.target.parentElement?.parentElement?.parentElement?.children[3]?.textContent || ""
       });
     }
   }
@@ -82,7 +82,7 @@ export function ModalModifyNews(props: ModalModifyNewsProps) {
       img: "",
       title: "",
       description: "",
-      createdAt: "",
+      created_at: "",
       modifiedAt: "",
     },
 
@@ -132,7 +132,7 @@ export function ModalModifyNews(props: ModalModifyNewsProps) {
     values.img = selectedNews.img,
     values.title = selectedNews.title,
     values.description = selectedNews.description,
-    values.createdAt = selectedNews.createdAt
+    values.created_at = selectedNews.created_at
   }, [selectedNews]) 
 
   return (
