@@ -17,10 +17,10 @@ export function LoginModal(props: LoginModalProps) {
   };
 
   const [userInfos, setUserInfos] = useState<DataConnexion>({
-    emailLogin: "",
-    passwordLogin: ""
+    email: "",
+    password: ""
   })
-  
+
   //function to recovery change in input email and password
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -32,42 +32,43 @@ export function LoginModal(props: LoginModalProps) {
 
   //define a schema with yup
   const validationSchema = yup.object().shape({
-    emailLogin: yup.string().email(`L'email doit être valide`).required(`L'email est requis !`),
-    passwordLogin: yup.string().min(8, "Il faut minimum 8 caractères").required("Le mot de passe est requis !")
+    email: yup.string().email(`L'email doit être valide`).required(`L'email est requis !`),
+    password: yup.string().min(8, "Il faut minimum 8 caractères").required("Le mot de passe est requis !")
   })
 
   const [isAuthentificated, setIsAuthenticated] = useState<boolean>(false);
   //function to redifine isAuthentificated
-  function redifineIsAuthentificated(boolean:boolean){
+  function redifineIsAuthentificated(boolean: boolean) {
     setIsAuthenticated(boolean)
   }
 
   //function submit form
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("données à soumettre:", userInfos);
+    //console.log("données à soumettre:", userInfos);
 
     //check with yup register data
     try {
       const userData = await validationSchema.validate(userInfos, { abortEarly: false })
-      console.log('Le formulaire est validé:', userData)
+      //console.log('Le formulaire est validé:', userData)
 
-      //use useApi
+      //do request server
       const response = await checkAuthentification(userData);
       if (response !== undefined) {
-        console.log("response:", response);
+        //console.log("response:", response);
 
-        const {id,token}=response;
+        //extract user and token key
+        const { user, token } = response;
 
         //stockage user token & id in localstorage
-        localStorage.setItem("userData", JSON.stringify({ id, token }));
+        localStorage.setItem("token", JSON.stringify( token ));
 
         //redifine UserDataFromServer
-        handleUserData(response);
+        handleUserData(user);
 
         //redifine userRole
-        redifineUserRole(response.role);
-        
+        redifineUserRole(user.role);
+
         setIsAuthenticated(true);
       }
       else {
@@ -78,11 +79,11 @@ export function LoginModal(props: LoginModalProps) {
       console.error(`Erreurs dans le formulaire:`, error)
     }
   }
-  
-  if (!isAuthentificated){
-    return(
+
+  if (!isAuthentificated) {
+    return (
       <>
-        <BtnLogin statut="Se connecter"/>
+        <BtnLogin statut="Se connecter" />
         <div id="authentication-modal" tabIndex={-1} aria-hidden="true" className="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
           <div className="relative p-4 w-full max-w-md max-h-full">
             <div className="relative bg-white rounded-lg shadow">
@@ -90,11 +91,11 @@ export function LoginModal(props: LoginModalProps) {
                 <form className="space-y-4" action="#" onSubmit={handleSubmit}>
                   <div>
                     <label htmlFor="email-login" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-left">Email</label>
-                    <input type="email" name="emailLogin" id="email-login" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required onChange={handleChange} />
+                    <input type="email" name="email" id="email-login" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required onChange={handleChange} />
                   </div>
                   <div className="relative">
                     <label htmlFor="password-login" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-left">Mot de passe</label>
-                    <input type={showPassword ? "text" : "password"} name="passwordLogin" id="password-login" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required onChange={handleChange} />
+                    <input type={showPassword ? "text" : "password"} name="password" id="password-login" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required onChange={handleChange} />
                     <i className="fa-regular fa-eye" onClick={togglePasswordVisibility}></i>
                   </div>
                   <div className="flex justify-between">
@@ -112,7 +113,7 @@ export function LoginModal(props: LoginModalProps) {
       </>
     )
   }
-  else{
-    return <BtnDisconect statut="Se déconnecter" redifineUserRole={redifineUserRole} redifineIsAuthentificated={redifineIsAuthentificated}/>
+  else {
+    return <BtnDisconect statut="Se déconnecter" redifineUserRole={redifineUserRole} redifineIsAuthentificated={redifineIsAuthentificated} />
   }
 }

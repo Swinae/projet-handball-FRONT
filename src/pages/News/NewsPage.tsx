@@ -6,18 +6,18 @@ import { getNewsList } from "../../services/api/News";
 export function NewsPage() {
   const [newsList, setNewsList] = useState<NewData[]>()
 
-  useEffect(()=>{
-    const handleNewsList=async()=>{
-      try{
-        const newsListFromServer=await getNewsList();
-        setNewsList(newsListFromServer);
+  useEffect(() => {
+    const handleNewsList = async () => {
+      try {
+        const {data} = await getNewsList();
+        setNewsList(data);
       }
-      catch(error){
-        console.error("La requête a échoué",error);
+      catch (error) {
+        console.error("La requête a échoué", error);
       }
     }
     handleNewsList();
-  },[])
+  }, [])
 
   return (
     <>

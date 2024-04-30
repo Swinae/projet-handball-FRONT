@@ -10,14 +10,15 @@ import { DeleteNewsModal } from "../../modales/DeleteNewsModal/DeleteNewsModal";
 
 export function NewsTab() {
   const [newsList, setNewsList] = useState<NewData[]>([]);
-  console.log("newsList", newsList);
+  //console.log("newsList", newsList);
 
   useEffect(() => {
     const getNewsListRequest = async () => {
-      const response = await getNewsList();
-      if (response) {
+      const { data } = await getNewsList();
+      //console.log("response: ",data)
+      if (data) {
         //update NewsList
-        setNewsList(response);
+        setNewsList(data);
       }
       else {
         console.log("la requête n'a pas abouti");
@@ -39,9 +40,10 @@ export function NewsTab() {
 
   //function to add News
   const addArtInNewsList = (newArt: any) => {
+    //console.log('newArt: ', newArt)
     setNewsList([
       ...newsList, {
-        id: `${newsList.length + 1}`,
+        //id: `${newsList.length + 1}`,
         ...newArt
       }
     ]);
@@ -72,8 +74,8 @@ export function NewsTab() {
 
   //function to edit News
   const deleteArt = (news_id: string) => {
-    const newsListModified = newsList.filter((art) =>art.id !== news_id);
-    
+    const newsListModified = newsList.filter((art) => art.id !== news_id);
+
     //reassign state newsList
     setNewsList(newsListModified)
   }
@@ -119,7 +121,7 @@ export function NewsTab() {
                   {art.img}
                 </TableCell>
 
-                <TableCell className="text-black text-center">{art.createdAt}</TableCell>
+                <TableCell className="text-black text-center">{art.created_at?.split('T')[0].split("-").reverse().join("-")}</TableCell>
 
                 <TableCell>
                   <div className="flex justify-between">
