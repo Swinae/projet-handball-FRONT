@@ -83,7 +83,7 @@ export function ModalCreateNews(props: ModalCreateNewsProps) {
 
   return (
     <div>
-      <button /* data-modal-target="crud-modal" data-modal-toggle="crud-modal" */ className="bg-custom-FF7D00 hover:bg-custom-818181 text-white rounded-lg p-2 mb-6" type="button" onClick={handleFormShow}>
+      <button data-modal-target="crud-modal" data-modal-toggle="crud-modal" className="bg-custom-FF7D00 hover:bg-custom-818181 text-white rounded-lg p-2 mb-6" type="button" onClick={handleFormShow}>
         Créer une nouvelle actualité
       </button>
 

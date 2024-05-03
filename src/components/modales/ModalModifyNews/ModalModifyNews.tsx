@@ -137,7 +137,7 @@ export function ModalModifyNews(props: ModalModifyNewsProps) {
 
   return (
     <>
-      <button /* data-modal-target="update-modal" data-modal-toggle="update-modal" */ className="block text-white bg-custom-287581 font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="button" onClick={handleShowDataInForm}>
+      <button data-modal-target="update-modal" data-modal-toggle="update-modal" className="block text-white bg-custom-287581 font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="button" onClick={handleShowDataInForm}>
         Modifier
       </button>
 
