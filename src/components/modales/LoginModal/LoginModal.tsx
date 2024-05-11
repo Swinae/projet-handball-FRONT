@@ -61,7 +61,7 @@ export function LoginModal(props: LoginModalProps) {
         const { user, token } = response;
 
         //stockage user token & id in localstorage
-        localStorage.setItem("token", JSON.stringify( token ));
+        localStorage.setItem("token", JSON.stringify(token));
 
         //redifine UserDataFromServer
         handleUserData(user);

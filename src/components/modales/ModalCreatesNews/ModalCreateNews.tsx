@@ -26,7 +26,7 @@ export function ModalCreateNews(props: ModalCreateNewsProps) {
 
   //secure form with yup
   let validationSchema = yup.object({
-    img: yup.mixed().required("Veuillez choisir une image"),
+    img: yup.mixed(),
     title: yup.string().max(30, "Veuillez inscrire 30 caractères maximum !").required("Le titre est requis !"),
     content: yup.string().min(20, "Veuillez inscrire au minimum 20 caractères !").required("La description est requise !"),
   })
