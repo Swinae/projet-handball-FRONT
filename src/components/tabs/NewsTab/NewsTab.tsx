@@ -43,7 +43,6 @@ export function NewsTab() {
     //console.log('newArt: ', newArt)
     setNewsList([
       ...newsList, {
-        //id: `${newsList.length + 1}`,
         ...newArt
       }
     ]);
@@ -51,7 +50,7 @@ export function NewsTab() {
 
   //function to edit News
   const addArtModified = (artModified: NewData) => {
-    const index = newsList.findIndex((news) => news.id === artModified.id);
+    const index = newsList.findIndex((news) => news.id == artModified.id);
     if (index === 0) {//insert to index 0
       setNewsList([
         artModified, ...newsList.slice(index + 1)
@@ -114,7 +113,7 @@ export function NewsTab() {
                 </TableCell>
 
                 <TableCell className="hidden whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                  {art.description}
+                  {art.content}
                 </TableCell>
 
                 <TableCell className="hidden whitespace-nowrap font-medium text-gray-900 dark:text-white">
