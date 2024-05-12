@@ -49,7 +49,7 @@ function App() {
         <div className='grid grid-cols-1 sm:grid-cols-2 justify-center'>
           <ClubIdentity />
           <div className='flex flex-col gap-4 items-end sm:flex-row sm:items-center sm:justify-end'>
-            {(userRole === "ADMIN" || userRole === "PLAYER" || userRole === "SUPPORTER") ? <Person avatar={userData && userData.avatar ? userData.avatar:"../public/avatar_default.jpg"} firstname={userData?.firstname ? userData.firstname : "John"} lastname={userData?.lastname ? userData.lastname : "Doe"} role={userData?.role} /> : <SignupModal />}
+            {(userRole === "ADMIN" || userRole === "PLAYER" || userRole === "SUPPORTER") ? <Person avatar={userData && userData.avatar ? userData.avatar:"/avatar_default.jpg"} firstname={userData?.firstname ? userData.firstname : "John"} lastname={userData?.lastname ? userData.lastname : "Doe"} role={userData?.role} /> : <SignupModal />}
             <LoginModal handleUserData={handleUserData} redifineUserRole={redifineUserRole} />
           </div>
         </div>
