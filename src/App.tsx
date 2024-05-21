@@ -27,14 +27,6 @@ interface dataUser {
 }
 
 function App() {
-  const [userRole, setUserRole] = useState<string>("visiteur");
-
-  //function to redifine userRole
-  function redifineUserRole(role: string) {
-    //redefine role in state userRole
-    setUserRole(role)
-  }
-
   //userData
   const [userData, setUserData] = useState<dataUser>();
 
@@ -49,11 +41,11 @@ function App() {
         <div className='grid grid-cols-1 sm:grid-cols-2 justify-center'>
           <ClubIdentity />
           <div className='flex flex-col gap-4 items-end sm:flex-row sm:items-center sm:justify-end'>
-            {(userRole === "ADMIN" || userRole === "PLAYER" || userRole === "SUPPORTER") ? <Person avatar={userData && userData.avatar ? userData.avatar:"/avatar_default.jpg"} firstname={userData?.firstname ? userData.firstname : "John"} lastname={userData?.lastname ? userData.lastname : "Doe"} role={userData?.role} /> : <SignupModal />}
-            <LoginModal handleUserData={handleUserData} redifineUserRole={redifineUserRole} />
+            {(userData?.role === "ADMIN" || userData?.role === "PLAYER" || userData?.role === "SUPPORTER") ? <Person avatar={userData && userData.avatar ? userData.avatar:"/avatar_default.jpg"} firstname={userData?.firstname ? userData.firstname : "John"} lastname={userData?.lastname ? userData.lastname : "Doe"} role={userData?.role} /> : <SignupModal />}
+            <LoginModal handleUserData={handleUserData} /* redifineUserRole={redifineUserRole} */ />
           </div>
         </div>
-        <NavBar userRole={userRole} />
+        <NavBar userRole={userData?userData.role : "visiteur"} />
       </header>
       <main>
         <Routes>
