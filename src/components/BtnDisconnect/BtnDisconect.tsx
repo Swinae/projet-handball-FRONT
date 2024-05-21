@@ -4,12 +4,12 @@ import { disconectedUser } from '../../services/api/disconectedUser';
 
 interface BtnDisconectProps {
   statut: string;
-  redifineUserRole: (role: string) => void;
+  //redifineUserRole: (role: string) => void;
   redifineIsAuthentificated: (boolean: boolean) => void;
 }
 
 export function BtnDisconect(props: BtnDisconectProps) {
-  const { statut, redifineUserRole, redifineIsAuthentificated } = props;
+  const { statut, /* redifineUserRole, */ redifineIsAuthentificated } = props;
 
   const navigate = useNavigate();
 
@@ -24,7 +24,7 @@ export function BtnDisconect(props: BtnDisconectProps) {
       //request
       const response = await disconectedUser(token);
       if (response != undefined) {
-        redifineUserRole("visteur");
+        //redifineUserRole("visteur");
         redifineIsAuthentificated(false);
 
         //remove token inlocalStorage
