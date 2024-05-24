@@ -17,7 +17,7 @@ export function NewsCarousel() {
                     on: "bg-gray-300/50"
                 }
             }
-        }
+        } 
     };
 
     const [news, setNews] = useState<NewData[]>([])
