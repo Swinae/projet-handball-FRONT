@@ -1,8 +1,7 @@
-import { format } from "date-fns";
 import { useState } from "react";
 import { useFormik } from "formik";
 import * as yup from 'yup';
-import { createNews } from "../../../services/api/createNews";
+import { createNews } from "../../../services/api/News";
 import { SuccessModal } from "../SuccessModal/SuccessModal";
 
 interface ModalCreateNewsProps {
@@ -27,17 +26,16 @@ export function ModalCreateNews(props: ModalCreateNewsProps) {
 
   //secure form with yup
   let validationSchema = yup.object({
-    img: yup.mixed().required("Veuillez choisir une image"),
+    img: yup.mixed(),
     title: yup.string().max(30, "Veuillez inscrire 30 caractères maximum !").required("Le titre est requis !"),
-    description: yup.string().min(20, "Veuillez inscrire au minimum 20 caractères !").required("La description est requise !"),
+    content: yup.string().min(20, "Veuillez inscrire au minimum 20 caractères !").required("La description est requise !"),
   })
 
   const { handleChange, handleSubmit, values, errors, resetForm } = useFormik({
     initialValues: {
       img: "",
       title: "",
-      description: "",
-      createdAt: "",
+      content: "",
     },
 
     // validation form with validationSchema of yup
@@ -45,20 +43,16 @@ export function ModalCreateNews(props: ModalCreateNewsProps) {
 
     //submit if form is validate by validationSchema of yup
     onSubmit: async values => {
-      console.log("les données sont validées, les voici:", values);
+      //console.log("les données sont validées, les voici:", values);
 
-      //add current date in values
-      const currentDate = format(new Date(), "dd/MM/yyyy");
-      values = {
-        ...values,
-        createdAt: currentDate,
-      }
+      //do request to server
+      const artCreated = await createNews(values);
 
+      //console.log('artCreated: ', artCreated);
+      
       setForm(values);
-      const response = await createNews(values);
-      console.log(response);
 
-      //if response ok
+      //if artCreated ok
       //close modal
       handleFormHidden();
 
@@ -70,7 +64,7 @@ export function ModalCreateNews(props: ModalCreateNewsProps) {
           successModal.style.display = 'none';
         })
       }
-      addArtInNewsList(values);
+      addArtInNewsList(artCreated);
       resetForm();
       
       //else rsponse not ok
@@ -118,9 +112,9 @@ export function ModalCreateNews(props: ModalCreateNewsProps) {
                   {errors.title && <small className="error">{errors.title}</small>}
                 </div>
                 <div className="col-span-2">
-                  <label htmlFor="description" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
-                  <textarea id="description" name="description" rows={10} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Description de l'actualité" onChange={handleChange} value={values.description}></textarea>
-                  {errors.description && <small className="error">{errors.description}</small>}
+                  <label htmlFor="content" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
+                  <textarea id="content" name="content" rows={10} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Description de l'actualité" onChange={handleChange} value={values.content}></textarea>
+                  {errors.content && <small className="error">{errors.content}</small>}
                 </div>
               </div>
 

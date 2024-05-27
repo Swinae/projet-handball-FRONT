@@ -1,7 +1,7 @@
 export const users = [
   {
     id: 1,
-    role: 'admin',
+    role: 'ADMIN',
     firstname: 'amine',
     lastname: 'serra',
     email: "amine.serra@hotmail.fr",
@@ -11,7 +11,7 @@ export const users = [
   },
   {
     id: 2,
-    role: 'joueur',
+    role: 'PLAYER',
     firstname: 'romain',
     lastname: 'doe',
     email: "romain.doe@hotmail.fr",
@@ -21,7 +21,7 @@ export const users = [
   },
   {
     id: 3,
-    role: 'supporter',
+    role: 'SUPPORTER',
     firstname: 'john',
     lastname: 'doe',
     email: "john.doe@hotmail.fr",

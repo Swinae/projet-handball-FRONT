@@ -28,13 +28,13 @@ export function NewCard(props: NewCardProps) {
           key={itemNew.id}
           className='w-full'
           imgAlt={`image reflétant le titre: ${itemNew.title} de l'actualité`} 
-          imgSrc={itemNew.img}
+          imgSrc={itemNew.img?itemNew.img:"/img_actu_defaut.jpg"}
         >
           <h5>
             {itemNew.title}
           </h5>
           <p>
-            {itemNew.description}
+            {itemNew.content}
           </p>
           <button className='flex w-28 justify-center items-center bg-custom-287581 text-white rounded-md' type='button' onClick={()=>{handleRedirection(itemNew.id)}}>Détails<FontAwesomeIcon className='ml-2' icon={faArrowRight}/></button>
         </Card>
