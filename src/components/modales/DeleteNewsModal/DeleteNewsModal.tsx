@@ -27,7 +27,6 @@ export function DeleteNewsModal(props:any) {
   return (
     <>
       <Button className="group flex items-center justify-center text-center font-medium relative focus:z-10 focus:outline-none transition-[color,background-color,border-color,text-decoration-color,fill,stroke,box-shadow] border border-transparent enabled:hover:bg-red-800 focus:ring-4 focus:ring-white border-none bg-red-800 text-white p-1 rounded-md ml-1" onClick={() => setOpenModal(true)}>Supprimer</Button>
-
       <Modal show={openModal} size="md" onClose={() => setOpenModal(false)} popup>
         <Modal.Header />
         <Modal.Body>

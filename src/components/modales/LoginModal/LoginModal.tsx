@@ -88,7 +88,6 @@ export function LoginModal(props: LoginModalProps) {
 
   //Initialize variable to indicate authentication state of user in order to return an appropriate component
   const [isAuthentificated, setIsAuthenticated] = useState<boolean>(false);
-
   //function to redifine isAuthentificated
   function redifineIsAuthentificated(boolean: boolean) {
     setIsAuthenticated(boolean)

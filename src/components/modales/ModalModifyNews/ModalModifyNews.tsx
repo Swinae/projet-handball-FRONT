@@ -43,7 +43,6 @@ export function ModalModifyNews(props: ModalModifyNewsProps) {
   const handleClosureModal = () => {
     setState("hidden");
   }
-
   const [selectedNews, setSelectedNews] = useState<NewData>({
     id: "",
     img: "",
@@ -132,7 +131,6 @@ export function ModalModifyNews(props: ModalModifyNewsProps) {
       </button>
 
       <SuccessModal />
-
       <div id="update-modal" tab-index="-1" aria-hidden="true" className={state + " overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"}>
         <div className="relative p-4 w-full max-w-md max-h-full">
           <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
@@ -147,7 +145,6 @@ export function ModalModifyNews(props: ModalModifyNewsProps) {
                 <span className="sr-only">Close modal</span>
               </button>
             </div>
-
             {/*modal */}
             <form className="p-4 md:p-5" onSubmit={handleSubmit}>
               <div>
