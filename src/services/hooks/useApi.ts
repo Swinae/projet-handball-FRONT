@@ -7,7 +7,9 @@ export function useApi() {
   const api: AxiosInstance = axios.create({
     //baseURL: import.meta.env.VITE_APP_DEV,
     baseURL: import.meta.env.VITE_APP_PROD,
+    
     //headers
+    headers
   })
 
   api.interceptors.request.use((config) => {
