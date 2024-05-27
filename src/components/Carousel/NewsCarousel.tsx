@@ -20,7 +20,7 @@ export function NewsCarousel() {
         } 
     };
 
-    const [news, setNews] = useState<NewData[]>([])
+  const [news, setNews] = useState<NewData[]>([])
 
     useEffect(() => {
         async function loadNews() {

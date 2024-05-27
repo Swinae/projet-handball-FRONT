@@ -1,34 +1,34 @@
 import { useNavigate } from 'react-router-dom';
 import { disconectedUser } from '../../services/api/disconectedUser';
-import { dataUser } from '../../services/interfaces/dataUser';
+//import { dataUser } from '../../services/interfaces/dataUser';
 
-interface BtnDisconectProps{
-  statut:string;
-  redifineUserRole:(role:string)=>void;
-  redifineIsAuthentificated:(boolean:boolean)=>void;
+interface BtnDisconectProps {
+  statut: string;
+  //redifineUserRole: (role: string) => void;
+  redifineIsAuthentificated: (boolean: boolean) => void;
 }
 
-export function BtnDisconect(props:BtnDisconectProps){
-  const {statut,redifineUserRole,redifineIsAuthentificated}=props;
-  
-  const navigate=useNavigate();
-  
-  async function handleDisconect(){
-    // to recover in localstorage token user
-    let userDataString=localStorage.getItem("userData");
+export function BtnDisconect(props: BtnDisconectProps) {
+  const { statut, /* redifineUserRole, */ redifineIsAuthentificated } = props;
 
-    if(userDataString){
-      let userData=JSON.parse(userDataString) as dataUser;
-      console.log(userData);
+  const navigate = useNavigate();
+
+  async function handleDisconect() {
+    // to recover in localstorage token user
+    const userToken = localStorage.getItem("token");
+
+    if (userToken) {
+      let token = JSON.parse(userToken);
+      //console.log("userToken: ",token);
 
       //request
-      const response=await disconectedUser(userData);
-      if(response!=undefined){
-        redifineUserRole("visteur");
+      const response = await disconectedUser(token);
+      if (response != undefined) {
+        //redifineUserRole("visteur");
         redifineIsAuthentificated(false);
-        
-        //remove userData inlocalStorage
-        localStorage.removeItem("userData");
+
+        //remove token inlocalStorage
+        localStorage.removeItem("token");
 
         //rediction to homepage
         navigate("/");
@@ -36,18 +36,18 @@ export function BtnDisconect(props:BtnDisconectProps){
         // reload page
         location.reload();
       }
-      else{
+      else {
         //show error modale
         console.log("La déconnexion s'est mal passée")
       }
     }
   }
 
-  return(
-      <button
-        className="btn-disconect block text-white bg-custom-FF7D00 font-medium rounded-full text-sm px-5 py-2.5 text-center mt-3 mb-3 mr-14"
-        type="button" onClick={handleDisconect}>
-          {statut}
-      </button>
+  return (
+    <button
+      className="btn-disconect block text-white bg-custom-FF7D00 font-medium rounded-full text-sm px-5 py-2.5 text-center mt-3 mb-3 mr-14"
+      type="button" onClick={handleDisconect}>
+      {statut}
+    </button>
   )
 }

@@ -4,20 +4,21 @@ import { NewData } from "../../../services/interfaces/NewData";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { ModalCreateNews } from "../../modales/ModalCreatesNews/ModalCreateNews";
-import { getNewsList } from "../../../services/api/getNewsList";
+import { getNewsList } from "../../../services/api/News";
 import { ModalModifyNews } from "../../modales/ModalModifyNews/ModalModifyNews";
 import { DeleteNewsModal } from "../../modales/DeleteNewsModal/DeleteNewsModal";
 
 export function NewsTab() {
   const [newsList, setNewsList] = useState<NewData[]>([]);
-  console.log("newsList", newsList);
+  //console.log("newsList", newsList);
 
   useEffect(() => {
     const getNewsListRequest = async () => {
-      const response = await getNewsList();
-      if (response) {
+      const { data } = await getNewsList();
+      //console.log("response: ",data)
+      if (data) {
         //update NewsList
-        setNewsList(response);
+        setNewsList(data);
       }
       else {
         console.log("la requête n'a pas abouti");
@@ -39,9 +40,9 @@ export function NewsTab() {
 
   //function to add News
   const addArtInNewsList = (newArt: any) => {
+    //console.log('newArt: ', newArt)
     setNewsList([
       ...newsList, {
-        id: `${newsList.length + 1}`,
         ...newArt
       }
     ]);
@@ -49,7 +50,7 @@ export function NewsTab() {
 
   //function to edit News
   const addArtModified = (artModified: NewData) => {
-    const index = newsList.findIndex((news) => news.id === artModified.id);
+    const index = newsList.findIndex((news) => news.id == artModified.id);
     if (index === 0) {//insert to index 0
       setNewsList([
         artModified, ...newsList.slice(index + 1)
@@ -65,9 +66,17 @@ export function NewsTab() {
         ...newsList.slice(0, index), artModified, ...newsList.slice(index + 1)
       ])
     }
-    else{
+    else {
       console.log("Index de l'article pas trouvé dans newsList");
     }
+  }
+
+  //function to edit News
+  const deleteArt = (news_id: string) => {
+    const newsListModified = newsList.filter((art) => art.id !== news_id);
+
+    //reassign state newsList
+    setNewsList(newsListModified)
   }
 
   //function to handle page next of table
@@ -97,27 +106,27 @@ export function NewsTab() {
           {visibleNewsList?.map((art) => {
             return (
               //stockage news ID in attribut id of TableRow
-              <TableRow key={art.id} id={art.id} className="bg-white dark:border-gray-700 dark:bg-gray-800">
+              <TableRow key={art.id} id={art.id} className="tableRow bg-white dark:border-gray-700 dark:bg-gray-800">
 
                 <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
                   {art.title}
                 </TableCell>
 
                 <TableCell className="hidden whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                  {art.description}
+                  {art.content}
                 </TableCell>
 
                 <TableCell className="hidden whitespace-nowrap font-medium text-gray-900 dark:text-white">
                   {art.img}
                 </TableCell>
 
-                <TableCell className="text-black text-center">{art.createdAt}</TableCell>
+                <TableCell className="text-black text-center">{art.created_at?.split('T')[0].split("-").reverse().join("-")}</TableCell>
 
                 <TableCell>
                   <div className="flex justify-between">
                     <ModalModifyNews addArtModified={addArtModified} id={art.id} />
 
-                    <DeleteNewsModal/>
+                    <DeleteNewsModal news_id={art.id} deleteArt={deleteArt} />
                   </div>
                 </TableCell>
 

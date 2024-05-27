@@ -3,15 +3,25 @@
 import { Button, Modal } from "flowbite-react";
 import { useState } from "react";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
+import { deleteNews } from "../../../services/api/News";
 
-export function DeleteNewsModal() {
+export function DeleteNewsModal(props:any) {
+  const {news_id, deleteArt}= props;
+
   const [openModal, setOpenModal] = useState(false);
 
-  const handleBtnOk=async()=>{
+  const handleBtnOk = async () => {
     //request api to delete news
-
-    //close modal
-    setOpenModal(false);
+    const response = await deleteNews(news_id);
+    console.log("response: ",response);
+    
+    if (response.data === 204){
+      //close modal
+      setOpenModal(false);
+  
+      //delete art
+      deleteArt(news_id);
+    }
   }
 
   return (

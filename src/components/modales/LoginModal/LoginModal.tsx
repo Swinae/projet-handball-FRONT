@@ -1,4 +1,5 @@
-import { FormEvent, useState } from "react";
+import { useState } from "react";
+import { useFormik } from "formik";
 import * as yup from 'yup';
 import { BtnLogin } from "../../BtnLogin/BtnLogin";
 import { LoginModalProps } from "../../../services/interfaces/LoginModalProps";
@@ -7,112 +8,136 @@ import { checkAuthentification } from "../../../services/api/checkAuthentificati
 import { BtnDisconect } from "../../BtnDisconnect/BtnDisconect";
 
 export function LoginModal(props: LoginModalProps) {
-    const { handleUserData, redifineUserRole } = props;
+  //destruct props
+  const { handleUserData } = props;
 
-    const [showPassword, setShowPassword] = useState<boolean>(false);
+  //Initialize variable to stock showPassword
+  const [showPassword, setShowPassword] = useState<boolean>(false);
 
-    //function to show or not show password
-    const togglePasswordVisibility = () => {
-        setShowPassword(!showPassword);
-    };
+  //define function to show or not show password
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
-    const [userInfos, setUserInfos] = useState<DataConnexion>({
-        emailLogin: "",
-        passwordLogin: ""
-    })
+  //Initialize variable to show or not modal
+  const [formShow, setFormShow] = useState<String>("hidden");
 
-    //function to recovery change in input email and password
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        setUserInfos({
-            ...userInfos,
-            [name]: value
-        })
-    }
+  //define function to show modal
+  const handleFormShow = () => {
+    setFormShow("flex");
+  }
 
-    //define a schema with yup
-    const validationSchema = yup.object().shape({
-        emailLogin: yup.string().email(`L'email doit être valide`).required(`L'email est requis !`),
-        passwordLogin: yup.string().min(8, "Il faut minimum 8 caractères").required("Le mot de passe est requis !")
-    })
+  //define function to not show modal
+  const handleFormHidden = () => {
+    setFormShow("hidden");
+  }
 
-    const [isAuthentificated, setIsAuthenticated] = useState<boolean>(false);
-    //function to redifine isAuthentificated
-    function redifineIsAuthentificated(boolean: boolean) {
-        setIsAuthenticated(boolean)
-    }
+  //Initialize variable to show a error
+  const [internError, setInternError] = useState<Boolean>(false)
 
-    //function submit form
-    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        console.log("données à soumettre:", userInfos);
+  //Initialize variable to stock userInfos
+  const [userInfos, setUserInfos] = useState<DataConnexion>({
+    email: "",
+    password: ""
+  })
 
-        //check with yup register data
-        try {
-            const userData = await validationSchema.validate(userInfos, { abortEarly: false })
-            console.log('Le formulaire est validé:', userData)
+  //define a validation schema with yup for connexion registery
+  const validationSchema = yup.object({
+    email: yup.string().email(`L'email doit être valide`).required(`L'email est requis !`),
+    password: yup.string().min(8, "Il faut minimum 8 caractères").required("Le mot de passe est requis !")
+  })
 
-            //use useApi
-            const response = await checkAuthentification(userData);
-            if (response !== undefined) {
-                console.log("response:", response);
+  const { handleChange, handleSubmit, values, errors, resetForm } = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    // validation form with validationSchema of yup
+    validationSchema: validationSchema,
+    onSubmit: async values => {
+      try {
+        //do request to server
+        const response = await checkAuthentification(values);
+        if (response !== undefined) {
+          //redifine variable userInfos
+          setUserInfos(values);
 
-                const { id, token } = response;
+          //extract user and token key
+          const { user, token, refreshToken } = response;
 
-                //stockage user token & id in localstorage
-                localStorage.setItem("userData", JSON.stringify({ id, token }));
+          //stockage user token in localstorage
+          localStorage.setItem("token", JSON.stringify(token));
+          //stockage user refreshToken in localstorage
+          localStorage.setItem("refreshToken", JSON.stringify(refreshToken));
 
-                //redifine UserDataFromServer
-                handleUserData(response);
+          //redifine UserDataFromServer
+          handleUserData(user);
 
-                //redifine userRole
-                redifineUserRole(response.role);
-
-                setIsAuthenticated(true);
-            }
-            else {
-                console.log("erreur d'authentification", response)
-            }
+          //redifine authentification
+          setIsAuthenticated(true);
         }
-        catch (error) {
-            console.error(`Erreurs dans le formulaire:`, error)
-        }
-    }
+      }
+      catch (error) {
+        // reinitialize register
+        resetForm()
+        // redifine variable InternError
+        setInternError(true);
+      }
+    },
+  })
 
-    if (!isAuthentificated) {
-        return (
-            <>
-                <BtnLogin statut="Se connecter" />
-                <div id="authentication-modal" tabIndex={-1} aria-hidden="true" className="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                    <div className="relative p-4 w-full max-w-md max-h-full">
-                        <div className="relative bg-white rounded-lg shadow">
-                            <div className="p-4 md:p-5">
-                                <form className="space-y-4" action="#" onSubmit={handleSubmit}>
-                                    <div>
-                                        <label htmlFor="email-login" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-left">Email</label>
-                                        <input type="email" name="emailLogin" id="email-login" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required onChange={handleChange} />
-                                    </div>
-                                    <div className="relative">
-                                        <label htmlFor="password-login" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-left">Mot de passe</label>
-                                        <input type={showPassword ? "text" : "password"} name="passwordLogin" id="password-login" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required onChange={handleChange} />
-                                        <i className="fa-regular fa-eye" onClick={togglePasswordVisibility}></i>
-                                    </div>
-                                    <div className="flex justify-between">
-                                        <a href="#" className="text-custom-15616D text-sm hover:underline">Mot de passe oublié?</a>
-                                    </div>
-                                    <div className="flex justify-end space-x-4">
-                                        <button type="button" className="cancel-btn bg-red-600 rounded-lg text-white px-3 py-3 w-82 h-38" data-modal-hide="authentication-modal">Annuler</button>
-                                        <button type="submit" className="bg-teal-800 rounded-lg text-white px-4 py-3 w-82 h-38 " data-modal-hide="authentication-modal">Se connecter</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </>
-        )
-    }
-    else {
-        return <BtnDisconect statut="Se déconnecter" redifineUserRole={redifineUserRole} redifineIsAuthentificated={redifineIsAuthentificated} />
-    }
+  //Initialize variable to indicate authentication state of user in order to return an appropriate component
+  const [isAuthentificated, setIsAuthenticated] = useState<boolean>(false);
+  //function to redifine isAuthentificated
+  function redifineIsAuthentificated(boolean: boolean) {
+    setIsAuthenticated(boolean)
+  }
+
+  if (!isAuthentificated) {
+    return (
+      <>
+        <BtnLogin statut="Se connecter" handleFormShow={handleFormShow} />
+        <div id="authentication-modal" tabIndex={-1} aria-hidden="true" className={formShow +
+          " overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"}>
+          <div className="relative p-4 w-full max-w-md max-h-full">
+            <div className="relative bg-white rounded-lg shadow">
+              <div className="p-4 md:p-5">
+                <form className="space-y-4" action="#" onSubmit={handleSubmit}>
+                  <div>
+                    <label htmlFor="email-login" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-left">Email</label>
+                    <input type="email" name="email" id="email-login" className="bg-gray-50 border
+                     border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5
+                      dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com"
+                      required onChange={handleChange} value={values.email} />
+                    {errors.email && <small className="error">{errors.email}</small>}
+                  </div>
+                  <div className="relative">
+                    <label htmlFor="password-login" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-left">Mot de passe</label>
+                    <input type={showPassword ? "text" : "password"} name="password" id="password-login" placeholder="••••••••"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5
+                       dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                      required onChange={handleChange} value={values.password} />
+                    <i className="fa-regular fa-eye" onClick={togglePasswordVisibility}></i>
+                    {errors.password && <small className="error">{errors.password}</small>}
+                  </div>
+                  <div className="flex justify-between">
+                    <a href="#" className="text-custom-15616D text-sm hover:underline">Mot de passe oublié?</a>
+                    {internError && <small className="text-red-700">Veuillez vérifier vos informations et réessayer.</small>}
+                  </div>
+                  <div className="flex justify-end space-x-4">
+                    <button type="button" className="cancel-btn bg-red-600 rounded-lg text-white px-3 py-3 w-82 h-38" 
+                      onClick={() => { resetForm(), setInternError(false), handleFormHidden() }}>Annuler</button>
+                    <button type="submit" className="bg-teal-800 rounded-lg text-white px-4 py-3 w-82 h-38 " >Se connecter</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div >
+        </div >
+      </>
+    )
+  }
+  else {
+    return <BtnDisconect statut="Se déconnecter" redifineIsAuthentificated={redifineIsAuthentificated} />
+  }
 }

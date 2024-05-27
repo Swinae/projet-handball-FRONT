@@ -16,7 +16,7 @@ export function Person(props:any) {
     <div className='div-person'>
       <UserAvatar avatar={avatar} />
       <div>
-        <p className='text-lg'>{firstname.charAt(0).toUpperCase()+firstname.slice(1)+" "+lastname.toUpperCase()}</p>
+        <p className='text-lg'>{firstname?.charAt(0).toUpperCase()+firstname?.slice(1)+" "+lastname?.toUpperCase()}</p>
         <p className='text-sm'>{role.charAt(0).toUpperCase()+role.slice(1)}</p>
       </div>
     </div>
