@@ -1,35 +1,32 @@
-//import { useApi } from "../hooks/useApi";
-//const api = useApi();
-import { eventFaker } from "../../pages/Events/fakerEvents";
 import IEventInterface from "../interfaces/EventInterface";
+import { useApi } from "../hooks/useApi";
 
-export async function getEvents(): Promise<any> {
-    const eventsList = eventFaker
-    return eventsList
-    //const getEvents = await api.get(`events`);
-    //return getEvents;
+const api = useApi()
+
+export async function getEvents(): Promise<IEventInterface> {
+    const { data } = await api.get(`event`);
+    return data;
 }
 
-export async function getEventById(eventId: number): Promise<IEventInterface | undefined> {
-    const eventById = eventFaker.find((event) => event.id === eventId)
-    return eventById
+export async function getEventById(eventId: number): Promise<IEventInterface> {
+    console.log('je suis la');
+    const { data } = await api.get(`${eventId}/:id`)
+    console.log(data);
+    return data
 }
 
-export async function postEvents(event: IEventInterface): Promise<any> {
-    eventFaker.push(event)
-    console.log(eventFaker);
-    return eventFaker
-    //const postEvent = await api.post(``, event);
-    //return postEvent;
+export async function postEvents(event: IEventInterface): Promise<IEventInterface> {
+    const { data } = await api.post('event', event)
+    return data
 }
 
-export async function putEvents(modifiedEvent: IEventInterface): Promise<any> {
-    const modifiedEventIndex =  eventFaker.findIndex(({id}) => id === modifiedEvent.id)
-    eventFaker[modifiedEventIndex] = modifiedEvent
+export async function putEvents(modifiedEvent: IEventInterface): Promise<IEventInterface> {
+    const eventId = modifiedEvent.id
+    const { data }  = await api.put(`event/:${eventId}`)
+    return data
 }
 
-export async function deleteEvent(eventId: number): Promise<any> {
-    const deletedEventIndex =  eventFaker.findIndex(({id}) => id === eventId)
-    eventFaker.splice(deletedEventIndex, 1) 
-    console.log(eventFaker);
+export async function deleteEvent(eventId: number): Promise<IEventInterface> {
+    const { data }  = await api.delete(`event/:${eventId}`)
+    return data
 }
