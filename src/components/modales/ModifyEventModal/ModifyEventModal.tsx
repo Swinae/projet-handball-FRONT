@@ -91,14 +91,14 @@ export default function ModifyEventModal(props: ModifyEventModalProps) {
 
                         <div>
                             <label htmlFor="category" className="block mb-2 text-sm font-medium text-gray-900 ">Type d'évènement</label>
-                            <select defaultValue={values.category ? values.category : modifiedEvent.category} onChange={handleChange} name="category" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                            <select defaultValue={values.type ? values.type : modifiedEvent.type} onChange={handleChange} name="type" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                                 <option value="Choose" disabled>Selectionnez un type d'évènement</option>
                                 <option value="Match">Match</option>
                                 <option value="Entraînement">Entraînement</option>
                                 <option value="Apéro">Apéro</option>
                             </select>
                         </div>
-                        {errors.category && <div className="error">{errors.category}</div>}
+                        {errors.type && <div className="error">{errors.type}</div>}
                         <div>
                             <label htmlFor="description" className="block mb-2 text-sm font-medium text-gray-900 ">Description</label>
                             <textarea onChange={handleChange} value={values.description ? values.description : modifiedEvent.description} name="description"rows="4" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Décrivez l'évènement" />

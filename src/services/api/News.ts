@@ -10,9 +10,9 @@ const api = useApi();
 export async function getNewsList(): Promise<NewData[] | any> {
   /* const data = listNews;
   return data */
-  const response = await api.get(`news/list`);
+  const { data } = await api.get(`news/list`);
   //console.log("réponse du serveur:", response)
-  return response
+  return data
 }
 
 export async function createNews(art: any) {

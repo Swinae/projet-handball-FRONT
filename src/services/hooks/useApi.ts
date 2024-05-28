@@ -2,46 +2,46 @@ import axios, { AxiosInstance } from "axios";
 
 export function useApi() {
 
-  const headers = { 'Access-Control-Allow-Origin': '*' };
+    const headers = { 'Access-Control-Allow-Origin': '*' };
 
-  const api: AxiosInstance = axios.create({
-    //baseURL: import.meta.env.VITE_APP_DEV,
-    baseURL: import.meta.env.VITE_APP_PROD,
-    
-    //headers
-    headers
-  })
+    const api: AxiosInstance = axios.create({
+        //baseURL: import.meta.env.VITE_APP_DEV,
+        baseURL: import.meta.env.VITE_APP_PROD,
 
-  api.interceptors.request.use((config) => {
-    //Ajouter le Token dans le header
+        //headers
+        headers
+    })
 
-    let token = localStorage.getItem("token");
+    api.interceptors.request.use((config) => {
+        //Ajouter le Token dans le header
 
-    token ? token = JSON.parse(token) : null;
+        let token = localStorage.getItem("token");
 
-    token ? config.headers['Authorization'] = `Bearer ${token}` : ''
+        token ? token = JSON.parse(token) : null;
 
-    return config;
-  })
+        token ? config.headers['Authorization'] = `Bearer ${token}` : ''
 
-  api.interceptors.response.use(
+        return config;
+    })
 
-    (response) => response,
+    api.interceptors.response.use(
 
-    async (error) => {
+        (response) => response,
 
-      if (error.response && error.response.status === 401) {
+        async (error) => {
 
-      }
+            if (error.response && error.response.status === 401) {
 
-      if (error.response && error.response.status === 500) {
+            }
 
-      }
+            if (error.response && error.response.status === 500) {
 
-      return Promise.reject(error)
-    }
+            }
 
-  )
+            return Promise.reject(error)
+        }
 
-  return api;
+    )
+
+    return api;
 }

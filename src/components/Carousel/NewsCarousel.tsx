@@ -2,7 +2,7 @@
 import { Carousel, CustomFlowbiteTheme, Flowbite } from "flowbite-react";
 import { NewData } from "../../services/interfaces/NewData";
 import { useEffect, useState } from "react";
-import { getNewsList } from "../../services/api/getNewsList";
+import { getNewsList } from "../../services/api/News";
 
 export function NewsCarousel() {
     const customTheme: CustomFlowbiteTheme = {
@@ -17,10 +17,10 @@ export function NewsCarousel() {
                     on: "bg-gray-300/50"
                 }
             }
-        } 
+        }
     };
 
-  const [news, setNews] = useState<NewData[]>([])
+    const [news, setNews] = useState<NewData[]>([])
 
     useEffect(() => {
         async function loadNews() {
@@ -30,6 +30,8 @@ export function NewsCarousel() {
         loadNews()
     }, [])
 
+    console.log(news);
+    
     const reversedNewsOrder = (news.slice(news.length - 4, news.length - 1).reverse())
 
     return (

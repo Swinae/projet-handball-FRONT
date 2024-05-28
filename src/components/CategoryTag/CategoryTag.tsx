@@ -8,14 +8,14 @@ export default function CategoryTag(props: EventProps) {
 
     const { eventCategory } = props
     let categoryTagColor = ''
-    switch (eventCategory?.category) {
-        case 'Match':
+    switch (eventCategory?.type) {
+        case 'MATCH':
             categoryTagColor = 'bg-red-600';
             break;
-        case "Entraînement":
+        case "ENTRAINEMENT":
             categoryTagColor = "bg-custom-FF7D00";
             break;
-        case "Apéro":
+        case "APERO":
             categoryTagColor = "bg-[#78290F]";
             break;
         default:
@@ -26,7 +26,7 @@ export default function CategoryTag(props: EventProps) {
     return (
         <>
             <div className={`category ${categoryTagColor} top-4 left-4 py-1 px-4 rounded-full text-white w-fit`}>
-                {eventCategory?.category}
+                {eventCategory?.type}
             </div>
         </>
     )
