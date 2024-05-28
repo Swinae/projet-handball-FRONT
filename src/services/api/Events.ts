@@ -3,7 +3,7 @@ import { useApi } from "../hooks/useApi";
 
 const api = useApi()
 
-export async function getEvents(): Promise<IEventInterface> {
+export async function getEvents(): Promise<any> {
     const { data } = await api.get(`event`);
     return data;
 }

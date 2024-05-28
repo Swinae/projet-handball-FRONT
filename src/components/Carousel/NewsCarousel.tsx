@@ -43,7 +43,7 @@ export function NewsCarousel() {
                             </div>
                             <div className="content">
                                 <h2 className="text-4xl">{newsItem.title}</h2>
-                                <p className='line-clamp-2'>{newsItem.description}</p>
+                                <p className='line-clamp-2'>{newsItem.content}</p>
                             </div>
                         </div>
                     )
