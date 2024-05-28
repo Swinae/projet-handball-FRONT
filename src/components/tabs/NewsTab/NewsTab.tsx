@@ -14,7 +14,7 @@ export function NewsTab() {
 
   useEffect(() => {
     const getNewsListRequest = async () => {
-      const { data } = await getNewsList();
+      const data = await getNewsList();
       //console.log("response: ",data)
       if (data) {
         //update NewsList

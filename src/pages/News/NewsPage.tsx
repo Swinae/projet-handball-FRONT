@@ -9,7 +9,7 @@ export function NewsPage() {
   useEffect(() => {
     const handleNewsList = async () => {
       try {
-        const {data} = await getNewsList();
+        const data = await getNewsList();
         setNewsList(data);
       }
       catch (error) {

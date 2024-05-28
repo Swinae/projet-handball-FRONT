@@ -9,8 +9,8 @@ export function NewsCarousel(): JSX.Element {
 
   useEffect(() => {
     async function loadNews() {
-      const { data }: { data: NewData[] } = await getNewsList();
-      setNews(data)
+      const newsList: NewData[] = await getNewsList();
+      setNews(newsList)
     }
 
     loadNews()
@@ -40,7 +40,7 @@ export function NewsCarousel(): JSX.Element {
           <div className="hidden duration-700 ease-in-out max-w-[800px]" data-carousel-item key={index}>
 
             {/* !!!! width de l'image harcodé pour que ça fonctionne avec le faker, A CHANGER AVEC LA DB !!! */}
-            <img src={newsItem.img?newsItem.img:"/img_actu_defaut.jpg"} className="block w-[800px]" alt="..." />
+            <img src={newsItem.img ? newsItem.img : "/img_actu_defaut.jpg"} className="block w-[800px]" alt="..." />
             <h2 className="text-4xl">{newsItem.title}</h2>
             <p className='line-clamp-2'>{newsItem.content}</p>
           </div>
