@@ -31,7 +31,7 @@ export default function DeleteEventModal(props: DeleteEventModalProps) {
                         </h3>
                         <div className="flex justify-center gap-4">
                             <Button color="failure" onClick={() => deleteEventClick(eventId)}>
-                                {"Oui, supprimer l'évènement"}
+                                Oui, supprimer l'évènement
                             </Button>
                             <Button color="gray" onClick={() => setOpenModal(false)}>
                                 Non, annuler
