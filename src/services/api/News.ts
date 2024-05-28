@@ -13,7 +13,6 @@ export async function getNewsList(): Promise<NewData[] | any> {
   const { data } = await api.get(`news/list`);
   //console.log("réponse du serveur:", response)
   return data
-  return data
 }
 
 export async function createNews(art: any) {
