@@ -29,7 +29,7 @@ export default function CreateEventModal({ updateEventsList }: CreateEventModalP
         location: '',
         start_time: '',
         end_time: '',
-        category: '',
+        type: '',
         description: ''
     })
 
@@ -40,7 +40,7 @@ export default function CreateEventModal({ updateEventsList }: CreateEventModalP
         location: yup.string().required(),
         start_time: yup.string().required(),
         end_time: yup.string().required(),
-        category: yup.string().required(),
+        type: yup.string().required(),
         description: yup.string().required(),
     });
 
@@ -101,15 +101,15 @@ export default function CreateEventModal({ updateEventsList }: CreateEventModalP
                             </div>
 
                             <div>
-                                <label htmlFor="category" className="block mb-2 text-sm font-medium text-gray-900 ">Type d'évènement</label>
-                                <select defaultValue={values.category ? values.category : newEvent.category} onChange={handleChange} name="category" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                                <label htmlFor="type" className="block mb-2 text-sm font-medium text-gray-900 ">Type d'évènement</label>
+                                <select defaultValue={values.type ? values.type : newEvent.type} onChange={handleChange} name="type" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                                     <option value="Choose" disabled>Selectionnez un type d'évènement</option>
                                     <option value="Match">Match</option>
                                     <option value="Entraînement">Entraînement</option>
                                     <option value="Apéro">Apéro</option>
                                 </select>
                             </div>
-                            {errors.category && <div className="error">{errors.category}</div>}
+                            {errors.type && <div className="error">{errors.type}</div>}
                             <div>
                                 <label htmlFor="description" className="block mb-2 text-sm font-medium text-gray-900 ">Description</label>
                                 <textarea onChange={handleChange} value={values.description ? values.description : newEvent.description} name="description" rows="4" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Décrivez l'évènement" />

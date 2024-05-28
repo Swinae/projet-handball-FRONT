@@ -18,8 +18,6 @@ export default function EventDetailsPage() {
         loadEvent()
     })
 
-
-
     return (
         <>
             <div className="applied-padding">
