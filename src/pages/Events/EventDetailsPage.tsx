@@ -11,12 +11,17 @@ export default function EventDetailsPage() {
 
     useEffect(() => {
         async function loadEvent() {
-            const response = await getEventById(Number(idEvent))
-            setEventInfo(response)
+            try {
+                const response = await getEventById(Number(idEvent))
+                setEventInfo(response)
+            } catch (error) {
+                console.error(error)
+            }
         }
 
         loadEvent()
-    })
+
+    },[])
 
     return (
         <>
@@ -26,9 +31,9 @@ export default function EventDetailsPage() {
                     <img className="rounded-lg" src={eventInfo?.img} alt="" />
                     <div className="flex justify-between items-center">
                         <p><CategoryTag eventCategory={eventInfo} /></p>
-                        <time>{eventInfo?.date}</time>
+                        <time className="text-right mt-2">{eventInfo?.created_at.split("T")[0].split("-").reverse().join("/")}</time>
                     </div>
-                    <p>{eventInfo?.description}</p>
+                    <p>{eventInfo?.content}</p>
                 </article>
             </div>
 
