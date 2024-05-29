@@ -23,25 +23,25 @@ export default function CreateEventModal({ updateEventsList }: CreateEventModalP
 
     const [newEvent, setNewEvent] = useState<IEventInterface>({
         id: 0,
-        img: '',
+        type: '',
         title: '',
-        date: '',
-        location: '',
+        content: '',
+        adress: '',
+        img: '',
         start_time: '',
         end_time: '',
-        type: '',
-        description: ''
+        created_at: '',
+        creator_id: 0,
     })
 
     let newEventSchema = yup.object({
         img: yup.mixed().required(),
         title: yup.string().required(),
-        date: yup.string().required(),
         location: yup.string().required(),
         start_time: yup.string().required(),
         end_time: yup.string().required(),
         type: yup.string().required(),
-        description: yup.string().required(),
+        content: yup.string().required(),
     });
 
     const { handleSubmit, handleChange, values, errors } = useFormik({
@@ -75,27 +75,23 @@ export default function CreateEventModal({ updateEventsList }: CreateEventModalP
                                 <input onChange={handleChange} value={values.title ? values.title : newEvent.title} type="text" name="title" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Titre de l'évenement" />
                             </div>
                             {errors.title && <div className="error">{errors.title}</div>}
+
                             <div>
-                                <label htmlFor="date" className="block mb-2 text-sm font-medium text-gray-900 ">Date de l'évènement</label>
-                                <input onChange={handleChange} value={values.date ? values.date : newEvent.date} type="date" name="date" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="" />
+                                <label htmlFor="adress" className="block mb-2 text-sm font-medium text-gray-900 ">Lieu de l'évènement</label>
+                                <input onChange={handleChange} value={values.adress ? values.adress : newEvent.adress} type="text" name="adress" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="ex: Winterfell" />
                             </div>
-                            {errors.date && <div className="error">{errors.date}</div>}
-                            <div>
-                                <label htmlFor="location" className="block mb-2 text-sm font-medium text-gray-900 ">Lieu de l'évènement</label>
-                                <input onChange={handleChange} value={values.location ? values.location : newEvent.location} type="text" name="location" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="ex: Winterfell" />
-                            </div>
-                            {errors.location && <div className="error">{errors.location}</div>}
+                            {errors.adress && <div className="error">{errors.adress}</div>}
 
                             <div className='flex gap-4'>
                                 <div className='flex-1'>
-                                    <label htmlFor="start_time" className="block mb-2 text-sm font-medium text-gray-900 ">Heure de début</label>
-                                    <input onChange={handleChange} value={values.start_time ? values.start_time : newEvent.start_time} type="time" name="start_time" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="10h00" />
+                                    <label htmlFor="start_time" className="block mb-2 text-sm font-medium text-gray-900 ">Date et heure de début</label>
+                                    <input onChange={handleChange} value={values.start_time ? values.start_time : newEvent.start_time} type="datetime-local" name="start_time" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="10h00" />
                                     {errors.start_time && <div className="error">{errors.start_time}</div>}
                                 </div>
 
                                 <div className='flex-1'>
-                                    <label htmlFor="end_time" className="block mb-2 text-sm font-medium text-gray-900 ">Heure de fin</label>
-                                    <input onChange={handleChange} value={values.end_time ? values.end_time : newEvent.end_time} type="time" name="end_time" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="12h00" />
+                                    <label htmlFor="end_time" className="block mb-2 text-sm font-medium text-gray-900 ">Date et heure de fin</label>
+                                    <input onChange={handleChange} value={values.end_time ? values.end_time : newEvent.end_time} type="datetime-local" name="end_time" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="12h00" />
                                     {errors.end_time && <div className="error">{errors.end_time}</div>}
                                 </div>
                             </div>
@@ -112,7 +108,7 @@ export default function CreateEventModal({ updateEventsList }: CreateEventModalP
                             {errors.type && <div className="error">{errors.type}</div>}
                             <div>
                                 <label htmlFor="description" className="block mb-2 text-sm font-medium text-gray-900 ">Description</label>
-                                <textarea onChange={handleChange} value={values.description ? values.description : newEvent.description} name="description" rows="4" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Décrivez l'évènement" />
+                                <textarea onChange={handleChange} value={values.content ? values.content : newEvent.content} name="content" rows="4" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Décrivez l'évènement" />
                             </div>
                             {errors.end_time && <div className="error">{errors.end_time}</div>}
 

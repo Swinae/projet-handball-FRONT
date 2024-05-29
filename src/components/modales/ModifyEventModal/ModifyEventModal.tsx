@@ -18,12 +18,11 @@ export default function ModifyEventModal(props: ModifyEventModalProps) {
     let modifiedEventSchema = yup.object({
         img: yup.mixed(),
         title: yup.string(),
-        date: yup.string(),
         location: yup.string(),
         start_time: yup.string(),
         end_time: yup.string(),
         type: yup.string(),
-        description: yup.string(),
+        content: yup.string()
     });
 
     const { handleSubmit, handleChange, values, errors } = useFormik({
@@ -64,27 +63,23 @@ export default function ModifyEventModal(props: ModifyEventModalProps) {
                             <input onChange={handleChange} value={values.title ? values.title : modifiedEvent.title} type="text" name="title"className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Titre de l'évenement" />
                         </div>
                         {errors.title && <div className="error">{errors.title}</div>}
+
                         <div>
-                            <label htmlFor="date" className="block mb-2 text-sm font-medium text-gray-900 ">Date de l'évènement</label>
-                            <input onChange={handleChange} value={values.date ? values.date : modifiedEvent.date} type="date" name="date" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="" />
+                            <label htmlFor="adress" className="block mb-2 text-sm font-medium text-gray-900 ">Lieu de l'évènement</label>
+                            <input onChange={handleChange} value={values.adress ? values.adress : modifiedEvent.adress} type="text" name="adress" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="ex: Winterfell" />
                         </div>
-                        {errors.date && <div className="error">{errors.date}</div>}
-                        <div>
-                            <label htmlFor="location" className="block mb-2 text-sm font-medium text-gray-900 ">Lieu de l'évènement</label>
-                            <input onChange={handleChange} value={values.location ? values.location : modifiedEvent.location} type="text" name="location" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="ex: Winterfell" />
-                        </div>
-                        {errors.location && <div className="error">{errors.location}</div>}
+                        {errors.adress && <div className="error">{errors.adress}</div>}
 
                         <div className='flex gap-4'>
                             <div className='flex-1'>
                                 <label htmlFor="start_time" className="block mb-2 text-sm font-medium text-gray-900 ">Heure de début</label>
-                                <input onChange={handleChange} value={values.start_time ? values.start_time : modifiedEvent.start_time} type="time" name="start_time" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="10h00" />
+                                <input onChange={handleChange} value={values.start_time ? values.start_time : modifiedEvent.start_time} type="datetime-local" name="start_time" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="10h00" />
                                 {errors.start_time && <div className="error">{errors.start_time}</div>}
                             </div>
 
                             <div className='flex-1'>
                                 <label htmlFor="end_time" className="block mb-2 text-sm font-medium text-gray-900 ">Heure de fin</label>
-                                <input onChange={handleChange} value={values.end_time ? values.end_time : modifiedEvent.end_time} type="time" name="end_time" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="12h00" />
+                                <input onChange={handleChange} value={values.end_time ? values.end_time : modifiedEvent.end_time} type="datetime-local" name="end_time" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="12h00" />
                                 {errors.end_time && <div className="error">{errors.end_time}</div>}
                             </div>
                         </div>
@@ -100,10 +95,10 @@ export default function ModifyEventModal(props: ModifyEventModalProps) {
                         </div>
                         {errors.type && <div className="error">{errors.type}</div>}
                         <div>
-                            <label htmlFor="description" className="block mb-2 text-sm font-medium text-gray-900 ">Description</label>
-                            <textarea onChange={handleChange} value={values.description ? values.description : modifiedEvent.description} name="description"rows="4" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Décrivez l'évènement" />
+                            <label htmlFor="content" className="block mb-2 text-sm font-medium text-gray-900 ">Description</label>
+                            <textarea onChange={handleChange} value={values.content ? values.content : modifiedEvent.content} name="content"rows="4" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Décrivez l'évènement" />
                         </div>
-                        {errors.end_time && <div className="error">{errors.end_time}</div>}
+                        {errors.content && <div className="error">{errors.content}</div>}
 
 
                         <div className="flex gap-4 justify-end">
