@@ -42,7 +42,7 @@ export function NewsCarousel() {
                                 <img src={newsItem.img} className="m-auto w-full object-contain" alt={`Image for the article ${newsItem.title}`} />
                             </div>
                             <div className="content">
-                                <h2 className="text-4xl">{newsItem.title}</h2>
+                                <h2 className="text-4xl line-clamp-2">{newsItem.title}</h2>
                                 <p className='line-clamp-2'>{newsItem.content}</p>
                             </div>
                         </div>
