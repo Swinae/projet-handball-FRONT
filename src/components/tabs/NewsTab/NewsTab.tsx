@@ -33,7 +33,10 @@ export function NewsTab() {
   const newsNbrPerPage: number = 4;
 
   //inverse newsList
-  const reversedNewsList = [...newsList].reverse();
+  let reversedNewsList;
+  if (newsList.length > 0){
+    reversedNewsList = [...newsList].reverse();
+  }
 
   //extract element quantity to show them in TableBody
   const visibleNewsList: NewData[] | undefined = reversedNewsList?.slice(startIndex, startIndex + newsNbrPerPage);
@@ -103,7 +106,7 @@ export function NewsTab() {
         </TableHead>
 
         <TableBody className="divide-y">
-          {visibleNewsList?.map((art) => {
+          {visibleNewsList? visibleNewsList.map((art) => {
             return (
               //stockage news ID in attribut id of TableRow
               <TableRow key={art.id} id={art.id} className="tableRow bg-white dark:border-gray-700 dark:bg-gray-800">
@@ -132,7 +135,7 @@ export function NewsTab() {
 
               </TableRow>
             );
-          })}
+          }) : null}
         </TableBody>
       </Table>
 

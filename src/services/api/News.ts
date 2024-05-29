@@ -11,7 +11,7 @@ export async function getNewsList(): Promise<NewData[] | any> {
   /* const data = listNews;
   return data */
   const { data } = await api.get(`news/list`);
-  //console.log("réponse du serveur:", response)
+  //console.log("réponse du serveur:", data)
   return data
 }
 
