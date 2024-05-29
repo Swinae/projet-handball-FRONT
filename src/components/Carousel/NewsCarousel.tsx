@@ -30,7 +30,7 @@ export function NewsCarousel() {
         loadNews()
     }, [])
 
-    const reversedNewsOrder = (news.slice(news.length - 4, news.length - 1).reverse())
+    const reversedNewsOrder = (news.slice(news.length - 3, news.length).reverse())
 
     return (
         <div className="h-[300px] sm:h-[400px] xl:h-[500px] 2xl:h-[600px]">
