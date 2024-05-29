@@ -10,8 +10,12 @@ export default function EventsPage() {
 
     useEffect(() => {
         async function loadEvents() {
-            const eventList = await getEvents()
-            setEvents(eventList)
+            try {
+                const eventList = await getEvents()
+                setEvents(eventList)
+            } catch (error) {
+                console.error(error)
+            }
         }
         
         loadEvents()
