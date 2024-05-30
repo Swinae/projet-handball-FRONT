@@ -13,14 +13,15 @@ export async function getEventById(eventId: number): Promise<IEventInterface> {
     return data
 }
 
-export async function postEvents(event: IEventInterface): Promise<IEventInterface> {
+export async function postEvents(event: Omit<IEventInterface, 'id' | 'created_at'>): Promise<IEventInterface> {
+    console.log('event :', event);
     const { data } = await api.post('event', event)
     return data
 }
 
 export async function putEvents(modifiedEvent: IEventInterface): Promise<IEventInterface> {
     const eventId = modifiedEvent.id
-    const { data }  = await api.put(`event/${eventId}`)
+    const { data }  = await api.patch(`event/${eventId}`, modifiedEvent)
     return data
 }
 

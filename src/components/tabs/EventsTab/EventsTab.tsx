@@ -11,19 +11,20 @@ export default function EventsTab() {
     const [events, setEvents] = useState<IEventInterface[]>([])
 
     useEffect(() => {
-
         async function loadEvents() {
             const eventList = await getEvents()
             setEvents(eventList)
         }
 
         loadEvents()
+        console.log(1);
 
-    }, [events])
+    }, [])
 
     const updateEventsList = async () => {
-        const eventList = await getEvents()      
-        setEvents([...events, eventList]);
+        const eventList = await getEvents()
+        console.log(2);
+        setEvents(eventList);
     };
 
     return (
@@ -58,7 +59,7 @@ export default function EventsTab() {
                                     <CategoryTag eventCategory={ event }/>
                                 </td>
                                 <td className="px-6 py-4">
-                                    {event?.date}
+                                    {event?.start_time.split("T")[0].split("-").reverse().join("/")}
                                 </td>
                                 <td className="px-6 py-4 text-right flex gap-2 justify-end">
                                     <ModifyEventModal event={event} updateEventsList={updateEventsList}/>

@@ -5,25 +5,13 @@ import * as yup from 'yup';
 import YupPassword from 'yup-password';
 YupPassword(yup);
 import './SignupModal.css'
-import IUserInterface from "../../../services/interfaces/UserInterface";
-import { users } from '../LoginModal/faker'
-import { addUser } from "../../../services/api/addUser";
+import { signup } from "../../../services/api/Signup";
 
 export default function SignupModal() {
     const [form, setForm] = useState<ISignupForm>({
         email: '',
         password: '',
         confirm: ''
-    })
-
-    const [newUser, setNewUser] = useState<IUserInterface>({
-        id: users.length + 1,
-        role: 'Supporter',
-        firstname: 'test',
-        lastname: 'test',
-        email: '',
-        password: '',
-        avatar: "avatar_default.jpg",
     })
 
     let signupSchema = yup.object({
@@ -41,26 +29,8 @@ export default function SignupModal() {
     const { handleSubmit, handleChange, values, errors } = useFormik({
         initialValues: form,
         validationSchema: signupSchema,
-        onSubmit: values => {
-            const updatedUser = {
-                ...newUser,
-                id: users.length + 1,
-                email: values.email,
-                password: values.password
-            };
-
-            const userAlreadyExist = users.find((user) => user.email === updatedUser.email)
-            if (userAlreadyExist === undefined) {
-                try {
-                    addUser(updatedUser)
-                
-                } catch (error) {
-                    console.log(error)
-                }
-
-            } else {
-                console.log('User already exist')
-            }
+        onSubmit: async values => {
+            await signup(values)
         }
     })
 

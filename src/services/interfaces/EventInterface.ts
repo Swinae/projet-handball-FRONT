@@ -7,8 +7,8 @@ export default interface IEventInterface {
     img: string;
     start_time: string;
     end_time: string;
-    created_at: string;
-    updated_at?: string;
+    created_at: Date;
+    updated_at?: Date;
     creator_id: number;
     match_id?: number;
 }
