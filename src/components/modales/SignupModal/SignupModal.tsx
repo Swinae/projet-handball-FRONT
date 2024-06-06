@@ -7,7 +7,6 @@ YupPassword(yup);
 import './SignupModal.css'
 import { signup } from "../../../services/api/Signup";
 import { Button, CustomFlowbiteTheme, Flowbite, Modal } from "flowbite-react";
-import { NavLink } from "react-router-dom";
 
 export default function SignupModal() {
     

@@ -1,8 +1,7 @@
 import { faker } from '@faker-js/faker';
 
 const email = faker.internet.email()
-const password = faker.helpers.fromRegExp(/[A-Z][a-z][0-9][#?!@$ %^&*-]{8,12}/
-)
+const password = faker.helpers.fromRegExp(/[A-Z][a-z][0-9][#?!@$ %^&*-]{8,12}/)
 
 describe('Testing signup process for creating a new account', () => {
   it('Should create a new user with role of supporter in the DB', () => {

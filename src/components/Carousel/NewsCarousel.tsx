@@ -33,23 +33,26 @@ export function NewsCarousel() {
     const reversedNewsOrder = (news.slice(news.length - 3, news.length).reverse())
 
     return (
-        <div className="h-[300px] sm:h-[400px] xl:h-[500px] 2xl:h-[600px]">
-            <Flowbite theme={{ theme: customTheme }}>
-                <Carousel>
-                    {reversedNewsOrder.map((newsItem: NewData, index: number) =>
-                        <div className="flex flex-col py-4 h-full max-w-[900px]" key={index}>
-                            <div className="w-full h-4/5 overflow-hidden">
-                                <img src={newsItem.img} className="m-auto w-full object-contain" alt={`Image for the article ${newsItem.title}`} />
+        <>
+            <h2 className="text-4xl mt-4 font-bold">Actualités</h2>
+            <div className="h-[300px] sm:h-[400px] xl:h-[500px] 2xl:h-[600px]">
+                <Flowbite theme={{ theme: customTheme }}>
+                    <Carousel>
+                        {reversedNewsOrder.map((newsItem: NewData, index: number) =>
+                            <div className="flex flex-col py-4 h-full max-w-[900px]" key={index}>
+                                <div className="w-full h-4/5 overflow-hidden">
+                                    <img src={newsItem.img} className="m-auto w-full object-contain" alt={`Image for the article ${newsItem.title}`} />
+                                </div>
+                                <div className="content">
+                                    <h2 className="text-3xl line-clamp-2">{newsItem.title}</h2>
+                                    <p className='line-clamp-2'>{newsItem.content}</p>
+                                </div>
                             </div>
-                            <div className="content">
-                                <h2 className="text-4xl line-clamp-2">{newsItem.title}</h2>
-                                <p className='line-clamp-2'>{newsItem.content}</p>
-                            </div>
-                        </div>
-                    )
-                    }
-                </Carousel>
-            </Flowbite>
-        </div>
+                        )
+                        }
+                    </Carousel>
+                </Flowbite>
+            </div>
+        </>
     );
 }
