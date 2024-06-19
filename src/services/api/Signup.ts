@@ -11,10 +11,15 @@ interface ISignupRequest {
 export async function signup(signupForm: ISignupForm): Promise<any> {
     const userCredentials: ISignupRequest = {
         email: signupForm.email,
-        password : signupForm.password 
+        password: signupForm.password
     }
 
-    const { data } = await api.post('auth/signup', userCredentials)
-    console.log(data);
-    return data
+    const response = await api.post('auth/signup', userCredentials)   
+
+    if (response.status === 201 && response.data.user) {
+        return true
+
+    } else {
+        console.error('User creation failed');
+    }
 }

@@ -7,6 +7,7 @@ YupPassword(yup);
 import './SignupModal.css'
 import { signup } from "../../../services/api/Signup";
 import { Button, CustomFlowbiteTheme, Flowbite, Modal } from "flowbite-react";
+import { AccountCreatedModal } from "../AccountCreatedModal/AccountCreatedModal";
 
 export default function SignupModal() {
     
@@ -25,6 +26,7 @@ export default function SignupModal() {
     })
 
     const [openModal, setOpenModal] = useState(false);
+    const [openSuccessModal, setOpenSuccessModal] = useState(false);
 
     let signupSchema = yup.object({
         email: yup.string().email('Le format de l\'email est invalide').required('Veuillez renseigner votre adresse mail'),
@@ -42,14 +44,27 @@ export default function SignupModal() {
         initialValues: form,
         validationSchema: signupSchema,
         onSubmit: async values => {
-            await signup(values)
+            handleSignup(values)
         }
     })
+
+    const handleSignup = async (values: ISignupForm) => {
+        const signupStatus = await signup(values)
+        if (signupStatus) {
+            setOpenSuccessModal(true)
+            setOpenModal(false)
+        }
+    }
+
+    const handleSuccessModal = (): void => {
+        setOpenModal(false) 
+    }
 
     return (
         <>
             <Flowbite theme={{ theme: customTheme }}>
                 <Button color="default" onClick={() => setOpenModal(true)}>Créer un compte</Button>
+                <AccountCreatedModal handleOpenModal={handleSuccessModal} show={openSuccessModal}/>
                 <Modal show={openModal} onClose={() => setOpenModal(false)}>
                     <Modal.Header>Créer un compte</Modal.Header>
                     <Modal.Body>
