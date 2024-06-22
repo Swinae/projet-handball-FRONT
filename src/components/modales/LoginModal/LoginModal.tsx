@@ -36,7 +36,7 @@ export function LoginModal(props: LoginModalProps) {
   const [internError, setInternError] = useState<Boolean>(false)
 
   //Initialize variable to stock userInfos
-  const [userInfos, setUserInfos] = useState<DataConnexion>({
+  const [_userInfos, setUserInfos] = useState<DataConnexion>({
     email: "",
     password: ""
   })
@@ -127,7 +127,7 @@ export function LoginModal(props: LoginModalProps) {
                   <div className="flex justify-end space-x-4">
                     <button type="button" className="cancel-btn bg-red-600 rounded-lg text-white px-3 py-3 w-82 h-38" 
                       onClick={() => { resetForm(), setInternError(false), handleFormHidden() }}>Annuler</button>
-                    <button type="submit" className="bg-teal-800 rounded-lg text-white px-4 py-3 w-82 h-38 " >Se connecter</button>
+                    <button id="login" type="submit" className="bg-teal-800 rounded-lg text-white px-4 py-3 w-82 h-38 " >Se connecter</button>
                   </div>
                 </form>
               </div>

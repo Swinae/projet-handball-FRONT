@@ -3,6 +3,9 @@ import { NewData } from "../interfaces/NewData";
 //faker
 //import { listNews } from "../../pages/News/faker";
 
+// Use Pick to create type with proprietie will
+type PartialNewData = Pick<NewData, 'id' | 'img' | 'title' | 'content'>;
+
 //instance axios with useApi()
 const api = useApi();
 
@@ -29,7 +32,7 @@ export async function deleteNews(news_id: number) {
   return response;
 }
 
-export async function modifyNews(data: NewData) {
+export async function modifyNews(data: PartialNewData) {
   //console.log('data:', data);
   const response = await api.put(`news/update/id/${data.id}`, data);
   return response;

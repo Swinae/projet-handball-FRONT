@@ -10,13 +10,13 @@ import { users } from '../LoginModal/faker'
 import { addUser } from "../../../services/api/addUser";
 
 export default function SignupModal() {
-    const [form, setForm] = useState<ISignupForm>({
+    const [form, _setForm] = useState<ISignupForm>({
         email: '',
         password: '',
         confirm: ''
     })
 
-    const [newUser, setNewUser] = useState<IUserInterface>({
+    const [newUser, _setNewUser] = useState<IUserInterface>({
         id: users.length + 1,
         role: 'Supporter',
         firstname: 'test',

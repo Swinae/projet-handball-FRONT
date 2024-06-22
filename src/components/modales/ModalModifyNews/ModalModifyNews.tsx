@@ -43,7 +43,10 @@ export function ModalModifyNews(props: ModalModifyNewsProps) {
   const handleClosureModal = () => {
     setState("hidden");
   }
-  const [selectedNews, setSelectedNews] = useState<NewData>({
+  // Use Pick to create type with proprietie will
+  type PartialNewData = Pick<NewData, 'id' | 'img' | 'title' | 'content'>;
+  
+  const [selectedNews, setSelectedNews] = useState<PartialNewData>({
     id: "",
     img: "",
     title: "",
@@ -87,7 +90,7 @@ export function ModalModifyNews(props: ModalModifyNewsProps) {
       //console.log("les données sont validées, les voici:", values);
 
       setSelectedNews(values); 
-      console.log("values à envoyer au serveur:", values);
+      //console.log("values à envoyer au serveur:", values);
 
       //do request to server
       const response = await modifyNews(values);

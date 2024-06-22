@@ -74,7 +74,7 @@ export function NewsTab() {
     }
   }
 
-  //function to edit News
+  //function to delete News
   const deleteArt = (news_id: string) => {
     const newsListModified = newsList.filter((art) => art.id !== news_id);
 

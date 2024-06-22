@@ -22,7 +22,7 @@ export function ModalCreateNews(props: ModalCreateNewsProps) {
   }
 
   //define state form
-  const [form, setForm] = useState({});
+  const [_form, setForm] = useState({});
 
   //secure form with yup
   let validationSchema = yup.object({
@@ -123,7 +123,7 @@ export function ModalCreateNews(props: ModalCreateNewsProps) {
                   Annuler
                 </button>
 
-                <button type="submit" className="text-white bg-custom-15616D rounded-md p-2">
+                <button type="submit" id="submit-news" className="text-white bg-custom-15616D rounded-md p-2">
                   Publier
                 </button>
               </div>

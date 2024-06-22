@@ -101,7 +101,7 @@ export default function ModifyEventModal(props: ModifyEventModalProps) {
                         {errors.type && <div className="error">{errors.type}</div>}
                         <div>
                             <label htmlFor="description" className="block mb-2 text-sm font-medium text-gray-900 ">Description</label>
-                            <textarea onChange={handleChange} value={values.description ? values.description : modifiedEvent.description} name="description"rows="4" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Décrivez l'évènement" />
+                            <textarea onChange={handleChange} value={values.description ? values.description : modifiedEvent.description} name="description"rows={4} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Décrivez l'évènement" />
                         </div>
                         {errors.end_time && <div className="error">{errors.end_time}</div>}
 
