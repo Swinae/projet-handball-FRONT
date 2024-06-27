@@ -31,8 +31,13 @@ export function EventsTable() {
 
     return (
         <>
-            <h2 className="text-4xl my-4 font-bold">Evènements</h2>
-            <div className="overflow-x-auto">
+            <div className="flex justify-between pt-8">
+                <h2 className="text-4xl py-4 font-bold">Evénements</h2>
+                <Flowbite theme={{ theme: customTheme }}>
+                    <Button className="mr-0" color="default"><NavLink to={'/résultats-des-matchs'}>Voir tous les événements</NavLink></Button>
+                </Flowbite>
+            </div>
+            <div className="overflow-x-auto pb-8">
                 <Table>
                     <TableBody className="divide-y">
                         {events.sort((a, b) => b.id - a.id).slice(0, 7).map((event: IEventInterface, index: number) => (
@@ -49,9 +54,6 @@ export function EventsTable() {
                         ))}
                     </TableBody>
                 </Table>
-                <Flowbite theme={{ theme: customTheme }}>
-                    <NavLink to={'/évènements'}><Button color="default">Voir tous les évènements</Button></NavLink>
-                </Flowbite>
             </div>
         </>
     );
