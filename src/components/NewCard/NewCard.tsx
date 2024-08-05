@@ -23,14 +23,14 @@ export function NewCard(props: NewCardProps) {
 
   return (
     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-8 gap-y-8 gap-x-8'>
-      {NewsList && NewsList.map((itemNew) => (
+      {NewsList &&[...NewsList].reverse().map((itemNew) => (
         <Card
           key={itemNew.id}
           className='w-full'
           imgAlt={`image reflétant le titre: ${itemNew.title} de l'actualité`} 
           imgSrc={itemNew.img?itemNew.img:"/img_actu_defaut.jpg"}
         >
-          <h5>
+          <h5 className='"mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white'>
             {itemNew.title}
           </h5>
           <p>

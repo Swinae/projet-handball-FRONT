@@ -87,13 +87,13 @@ export function LoginModal(props: LoginModalProps) {
   })
 
   //Initialize variable to indicate authentication state of user in order to return an appropriate component
-  const [isAuthentificated, setIsAuthenticated] = useState<boolean>(false);
-  //function to redifine isAuthentificated
-  function redifineIsAuthentificated(boolean: boolean) {
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  //function to redifine isAuthenticated
+  function redifineIsAuthenticated(boolean: boolean) {
     setIsAuthenticated(boolean)
   }
 
-  if (!isAuthentificated) {
+  if (!isAuthenticated) {
     return (
       <>
         <BtnLogin statut="Se connecter" handleFormShow={handleFormShow} />
@@ -122,7 +122,7 @@ export function LoginModal(props: LoginModalProps) {
                   </div>
                   <div className="flex justify-between">
                     <a href="#" className="text-custom-15616D text-sm hover:underline">Mot de passe oublié?</a>
-                    {internError && <small className="text-red-700">Veuillez vérifier vos informations et réessayer.</small>}
+                    {internError && <small className="text-red-700">Une erreur s'est produite, veuillez réessayer.</small>}
                   </div>
                   <div className="flex justify-end space-x-4">
                     <button type="button" className="cancel-btn bg-red-600 rounded-lg text-white px-3 py-3 w-82 h-38" 
@@ -138,6 +138,6 @@ export function LoginModal(props: LoginModalProps) {
     )
   }
   else {
-    return <BtnDisconect statut="Se déconnecter" redifineIsAuthentificated={redifineIsAuthentificated} />
+    return <BtnDisconect statut="Se déconnecter" redifineIsAuthenticated={redifineIsAuthenticated} />
   }
 }

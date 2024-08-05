@@ -39,7 +39,7 @@ export function NewsCarousel() {
           {reversedNewsOrder.map((newsItem: NewData, index: number) =>
             <div className="flex flex-col py-4 h-full max-w-[900px]" key={index}>
               <div className="w-full h-4/5 overflow-hidden">
-                <img src={newsItem.img} className="m-auto w-full object-contain" alt={`Image for the article ${newsItem.title}`} />
+                <img src={newsItem.img? newsItem.img:"/news_handball_player.jpg"} className="m-auto w-full object-contain" alt={`Image for the article ${newsItem.title}`} />
               </div>
               <div className="content">
                 <h2 className="text-4xl">{newsItem.title}</h2>

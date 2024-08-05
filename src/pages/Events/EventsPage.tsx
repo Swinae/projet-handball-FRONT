@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 import EventCard from "../../components/Cards/EventCard";
-import { getEvents } from "../../services/api/Events";
+//import { getEvents } from "../../services/api/Events";
 import IEventInterface from "../../services/interfaces/EventInterface";
 
 
 export default function EventsPage() {
 
-    const [events, setEvents] = useState<any>([])
+    const [events, _setEvents] = useState<any>([])
 
     useEffect(() => {
         async function loadEvents() {
-            const eventList = await getEvents()
-            setEvents(eventList)
+            /* const eventList = await getEvents()
+            setEvents(eventList) */
         }
         
         loadEvents()

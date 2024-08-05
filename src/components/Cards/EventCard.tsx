@@ -12,7 +12,7 @@ export default function EventCard(props: any) {
                     <CategoryTag eventCategory={ eventInfo } />
                 </div>
                 <a href="#">
-                    <img className="rounded-t-lg" src={eventInfo.img} alt="" />
+                    <img className="rounded-t-lg" src={eventInfo.img?eventInfo.img:"/news_handball_player.jpg"} alt="" />
                 </a>
 
                 <div className="p-5">

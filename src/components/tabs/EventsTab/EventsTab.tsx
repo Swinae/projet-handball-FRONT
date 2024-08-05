@@ -13,8 +13,8 @@ export default function EventsTab() {
     useEffect(() => {
 
         async function loadEvents() {
-            const eventList = await getEvents()
-            setEvents(eventList)
+            /* const eventList = await getEvents()
+            setEvents(eventList) */
         }
 
         loadEvents()
@@ -23,7 +23,7 @@ export default function EventsTab() {
 
     const updateEventsList = async () => {
         const eventList = await getEvents()      
-        setEvents([...events, eventList]);
+        setEvents([...events, ...eventList]);
     };
 
     return (

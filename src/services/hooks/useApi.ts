@@ -2,11 +2,10 @@ import axios, { AxiosInstance } from "axios";
 
 export function useApi() {
 
-  const headers = { 'Access-Control-Allow-Origin': '*' };
+  const headers = {'Content-Type': 'application/json','Accept': 'application/json'};
 
   const api: AxiosInstance = axios.create({
-    //baseURL: import.meta.env.VITE_APP_DEV,
-    baseURL: import.meta.env.VITE_APP_PROD,
+    baseURL: import.meta.env.VITE_APP_DEV,
 
     //headers
     headers
