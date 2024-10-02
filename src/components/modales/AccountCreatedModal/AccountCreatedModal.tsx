@@ -23,7 +23,7 @@ export function AccountCreatedModal(props: AccountCreatedProps) {
                 <Modal.Body>
                     <div className="text-center">
                         <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-                            Votre compte à bien été créé.
+                            Votre compte a bien été créé.
                         </h3>
                         <div className="flex justify-center gap-4">
                             <Button color="success" onClick={() => {handleOpenModal(); setOpenModal(false)}}>

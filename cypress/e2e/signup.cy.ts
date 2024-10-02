@@ -11,5 +11,6 @@ describe('Testing signup process for creating a new account', () => {
     cy.get('[id="password-signup"]').type(password)
     cy.get('[id="confirm-signup"]').type(password)
     cy.get('button').contains('Créer le compte').click()
+    cy.get('h3').contains('Votre compte a bien été créé')
   })
 })

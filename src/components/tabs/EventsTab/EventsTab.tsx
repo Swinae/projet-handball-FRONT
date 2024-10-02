@@ -22,7 +22,6 @@ export default function EventsTab() {
 
     const updateEventsList = async () => {
         const eventList = await getEvents()
-        console.log(2);
         setEvents(eventList);
     };
 
